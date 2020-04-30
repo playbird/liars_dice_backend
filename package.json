@@ -1,5 +1,5 @@
 {
-  "name": "liar's dice backend",
+  "name": "liarsDiceBackend",
   "version": "0.3.0",
   "description": "A online version of liar's dice",
   "engines": {
