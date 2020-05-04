@@ -1,0 +1,15 @@
+Tasks
+
+Create a scenario (unique instance) for each group that is playing
+Sceneria must be shareable (see playcards.io) to add players to group
+All players begin with 5 dice
+Random roll of one die for each to determine who goes first
+Randomly roll dice
+Determine how man dice are rolled per participant (decrement after each round)
+Visual representation of dice, showing only the ones that belong to the current user
+Bid process:
+	Select number (2-6)
+	Select number of die
+	A bid must increase number on the die, or the number of die, or both
+Randomly resort order of play after every round (optional)
+
