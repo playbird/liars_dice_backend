@@ -10,18 +10,29 @@ const game = {
 function rootHandler(req, res) {
   res.render('pages/index');
 }
+
 function gamesHandler(req, res) {
   // to do--check for a user ID
   const userID = Math.random().toString();
   game.users.push({
     id: userID,
-    dice: []
+    dice: playersDice(5)
   });
   res.send({
     me: userID, 
     game: game
   });
 }
+
+function playersDice(diceCount) {
+  var arr = [];
+  for (i = 0; i < diceCount; i++ ) {
+    var roll = Math.ceil(Math.random() * 6);
+    arr.push(roll);
+  }
+  return arr;
+}
+
 express()
   .use(express.static(path.join(__dirname, 'public')))
   .set('views', path.join(__dirname, 'views'))
