@@ -1,26 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <script type = "text/javascript">
-    // Want to use async/await? Add the `async` keyword to your outer function/method.
-    const axios = require('axios');
-    let userID;
-
-    async function getGame(userID) {
-      try {
-        const response = await axios.get('/games?userID=' + userID);
-        console.log(response);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-
-  </script>
 </head>
 
 <body>
-
- 
-
+  Hello World
+  <script src="../../public/bundle.js" charset="utf-8"></script>
 </body>
 </html>
