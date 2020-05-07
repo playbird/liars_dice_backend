@@ -7,8 +7,8 @@
   },
   "main": "index.js",
   "scripts": {
-    "start": "babel-node index.js",
-    "dev-server": "nodemon --exec babel-node index.js --ignore public/",
+    "start": "babel-node server.js",
+    "dev-server": "nodemon --exec babel-node server.js --ignore public/",
     "dev-bundle": "webpack -w -d"
   },
   "dependencies": {
