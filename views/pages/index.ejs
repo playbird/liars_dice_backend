@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <script src="bundle.js"></script>
-    <script type="text/javascript">
-      function update() {
-        EntryPoint.getGame().then(gameState => {
-          let element = document.getElementById("game_state");
-          element.textContent = JSON.stringify(gameState.data);
-        })
+<head>
+  <script type = "text/javascript">
+    let userID;
+
+    function getGame(userID) {
+      EntryPoint.getGame('/games?userID=' + userID).then(response => {
+        console.log(response);
+      }).catch (error) {
+        console.error(error);
       }
-      window.onload = update;
-    </script>
-  </head>
-  <body>
-    <p id="game_state">
-      There are no players, so there's no game.
-    </p>
-  </body>
+    }
+
+  </script>
+  <script src="bundle.js"></script>
+</head>
+
+<body>
+
+
+
+</body>
 </html>
