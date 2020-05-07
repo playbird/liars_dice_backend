@@ -7,7 +7,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "babel-node index.js",
     "dev-server": "nodemon --exec babel-node index.js --ignore public/",
     "dev-bundle": "webpack -w -d"
   },
@@ -24,6 +24,7 @@
     "react-dom": "^16.13.1"
   },
   "devDependencies": {
+    "babel-core": "^6.26.3",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.8.0",
     "eslint-plugin-react": "^7.19.0",

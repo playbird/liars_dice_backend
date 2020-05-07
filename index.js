@@ -1,25 +1,44 @@
-import express from 'express';
-import React from 'react';
-import ReactDOMServer from 'react-dom/server';
-import App from './src/components/App';
+const express = require('express')
+const path = require('path')
 
-const server = express();
-server.use(express.static('public'));
+const PORT = process.env.PORT || 5000
 
-server.get('/', (req, res) => {
-  const initialMarkup = ReactDOMServer.renderToString(<App />);
+//global game state
+const game = {
+  users: []
+};
 
-  res.send(`
-    <html>
-      <head>
-        <title>Sample React App</title>
-      </head>
-      <body>
-        <div id="mountNode">${initialMarkup}</div>
-        <script src="bundle.js"></script>
-      </body>
-    </html>
-  `)
-});
+function rootHandler(req, res) {
+  res.render('pages/index');
+}
 
-server.listen(5000, () => console.log('Server is running...'));
+function gamesHandler(req, res) {
+  // to do--check for a user ID
+  const userID = Math.random().toString();
+  game.users.push({
+    id: userID,
+    dice: playersDice(5)
+  });
+  res.send({
+    me: userID,
+    game: game
+  });
+}
+
+function playersDice(diceCount) {
+  var arr = [];
+  for (let i = 0; i < diceCount; i++ ) {
+    var roll = Math.ceil(Math.random() * 6);
+    arr.push(roll);
+  }
+  return arr;
+}
+
+express()
+  .use(express.static(path.join(__dirname, 'public')))
+  .set('views', path.join(__dirname, 'views'))
+  .set('view engine', 'ejs')
+  .get('/', rootHandler)
+  .get('/games', gamesHandler)
+  .listen(PORT, () => console.log(`Listening on ${ PORT }`))
+

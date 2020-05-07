@@ -1,10 +1,21 @@
 <!DOCTYPE html>
 <html>
-<head>
-</head>
-
-<body>
-  Hello World
-  <script src="../../public/bundle.js" charset="utf-8"></script>
-</body>
+  <head>
+    <title>Liar's Dice</title>
+  </head>
+  <body>
+    <script src="bundle.js"></script>
+    <script type="text/javascript">
+      function update() {
+        EntryPoint.getGame().then(gameState => {
+          let element = document.getElementById("game_state");
+          element.textContent = JSON.stringify(gameState.data);
+        })
+      }
+      window.onload = update;
+    </script>
+    <p id="game_state">
+      There are no players, so there's no game.
+    </p>
+  </body>
 </html>

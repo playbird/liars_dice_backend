@@ -1,9 +1,13 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+// This file is the root of the javascript that runs in the browser
 
-import App from './components/App';
+const axios = require('axios');
+let userID;
 
-ReactDOM.hydrate(
-  <App />,
-  document.getElementById('mountNode'),
-);
+// returns a Promise
+function getGame(userID) {
+  return axios.get('/games?userID=' + userID);
+}
+
+module.exports = {
+  getGame
+}
