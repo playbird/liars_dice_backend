@@ -8,6 +8,7 @@
   "main": "server.js",
   "scripts": {
     "start": "babel-node server.js",
+    "heroku-postbuild": "webpack -p",
     "dev-server": "nodemon --exec babel-node server.js --ignore public/",
     "dev-bundle": "webpack -w -d"
   },
