@@ -1,7 +1,8 @@
 // This file is the root of the javascript that runs in the browser
+// This gets transpiled into bundle.js
+// Access this code via the variable name EntryPoint (ex: EntryPoint.getGame)
 
 const axios = require('axios');
-let userID;
 
 // returns a Promise
 function getGame(userID) {
@@ -9,5 +10,5 @@ function getGame(userID) {
 }
 
 module.exports = {
-  getGame
+  getGame:getGame
 }

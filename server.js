@@ -13,12 +13,16 @@ function rootHandler(req, res) {
 }
 
 function gamesHandler(req, res) {
-  // to do--check for a user ID
-  const userID = Math.random().toString();
-  game.users.push({
-    id: userID,
-    dice: playersDice(5)
-  });
+  let userID = req.query.userID;
+  if(userID == 'undefined') {
+    // if new user, create an ID, if not, skip to game
+    userID = Math.random().toString();
+    game.users.push({
+      id: userID,
+      dice: playersDice(5)
+    });
+  }
+ 
   res.send({
     me: userID,
     game: game

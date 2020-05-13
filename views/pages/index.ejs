@@ -3,19 +3,19 @@
 <head>
   <script src="bundle.js"></script>
   <script type = "text/javascript">
-    let userID;
+    let myID;
     let gameState;
 
     function update(userID) {
       EntryPoint.getGame(userID).then(response => {
-        userID = response.data.me;
+        myID = response.data.me;
         gameState = response.data.game;
         console.log("User ID is: " + userID);
-        console.log("Game state is: " + JSON.stringify(gameState));
-
+        console.log("My ID is: " + myID);
+        setTimeout(update, 10000, myID);
       });
     }
-    update(userID);
+    update(myID);
   </script>
   
 </head>
