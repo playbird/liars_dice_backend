@@ -12,6 +12,12 @@ function rootHandler(req, res) {
   res.render('pages/index');
 }
 
+function getGameForUser(user) {
+  // loop through the users
+  // if the userID == user then show dice
+  // otherwise, hide dice
+}
+
 function gamesHandler(req, res) {
   let userID = req.query.userID;
   if(userID == 'new') {
@@ -22,10 +28,10 @@ function gamesHandler(req, res) {
       dice: playersDice(5)
     });
   }
- 
+
   res.send({
     me: userID,
-    game: game
+    game: game // getGameForUser(userID)
   });
 }
 
