@@ -10,6 +10,7 @@
       EntryPoint.getGame(userID).then(response => {
         myID = response.data.me;
         gameState = response.data.game;
+        EntryPoint.drawGame(window.document, gameState, myID);
         console.log("User ID is: " + userID);
         console.log("My ID is: " + myID);
         setTimeout(update, 10000, myID);
@@ -18,7 +19,7 @@
     function initialize() {
       update('new');
     }
-    window.onload(initialize);
+    window.onload = initialize;
 
   </script>
   

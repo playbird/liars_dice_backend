@@ -9,10 +9,16 @@ function getGame(userID) {
   return axios.get('/games?userID=' + userID);
 }
 
-function drawGame(root) {
-  
-}
+function drawGame(document, gameState, myID) {
+  while (document.body.firstChild) {
+    document.body.removeChild(document.body.firstChild);
+  }
+  playerRow = document.createElement('P');
+  playerRow.textContent = JSON.stringify(gameState);
+  document.body.appendChild(playerRow); 
+  }
 
 module.exports = {
-  getGame:getGame
+  getGame: getGame,
+  drawGame: drawGame
 }
