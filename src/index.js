@@ -13,10 +13,10 @@ function drawGame(document, gameState, myID) {
   while (document.body.firstChild) {
     document.body.removeChild(document.body.firstChild);
   }
-  playerRow = document.createElement('P');
+  let playerRow = document.createElement('P');
   playerRow.textContent = JSON.stringify(gameState);
-  document.body.appendChild(playerRow); 
-  }
+  document.body.appendChild(playerRow);
+}
 
 module.exports = {
   getGame: getGame,
