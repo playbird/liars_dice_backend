@@ -14,7 +14,7 @@ function rootHandler(req, res) {
 
 function gamesHandler(req, res) {
   let userID = req.query.userID;
-  if(userID == 'undefined') {
+  if(userID == 'new') {
     // if new user, create an ID, if not, skip to game
     userID = Math.random().toString();
     game.users.push({

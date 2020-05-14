@@ -15,7 +15,11 @@
         setTimeout(update, 10000, myID);
       });
     }
-    update(myID);
+    function initialize() {
+      update('new');
+    }
+    window.onload(initialize);
+
   </script>
   
 </head>

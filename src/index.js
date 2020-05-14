@@ -9,6 +9,10 @@ function getGame(userID) {
   return axios.get('/games?userID=' + userID);
 }
 
+function drawGame(root) {
+  
+}
+
 module.exports = {
   getGame:getGame
 }
