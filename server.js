@@ -8,6 +8,11 @@ const game = {
   users: []
 };
 
+function getUserCount() {
+  let count = game.users.length;
+  return count;
+} 
+
 function rootHandler(req, res) {
   res.render('pages/index');
 }
@@ -22,7 +27,8 @@ function getGameForUser(userID) {
     } else {
       let otherUser =  {
         id: game.users[i].id,
-        dice: game.users[i].dice.length
+        dice: game.users[i].dice.length,
+        name: game.users[i].name
       };
       privateGame.users.push(otherUser);
       };
@@ -37,7 +43,8 @@ function gamesHandler(req, res) {
     userID = Math.random().toString();
     let newUser = {
       id: userID,
-      dice: playersDice(5)
+      dice: playersDice(5),
+      name: "player " + (getUserCount() + 1)
     };
     game.users.push(newUser);
   }
