@@ -12,27 +12,41 @@ function rootHandler(req, res) {
   res.render('pages/index');
 }
 
-function getGameForUser(user) {
-  // loop through the users
-  // if the userID == user then show dice
-  // otherwise, hide dice
+function getGameForUser(userID) {
+   let privateGame = {
+    users: []
+    };
+   for (var i = 0; i < game.users.length; i++) { 
+    if (game.users[i].id == userID) {
+      privateGame.users.push(game.users[i]);
+    } else {
+      let otherUser =  {
+        id: game.users[i].id,
+        dice: game.users[i].dice.length
+      };
+      privateGame.users.push(otherUser);
+      };
+    }
+  return privateGame;
 }
 
 function gamesHandler(req, res) {
   let userID = req.query.userID;
-  if(userID == 'new') {
+  if (userID == 'new') {
     // if new user, create an ID, if not, skip to game
     userID = Math.random().toString();
-    game.users.push({
+    let newUser = {
       id: userID,
       dice: playersDice(5)
-    });
+    };
+    game.users.push(newUser);
   }
-
-  res.send({
+  let myGame = getGameForUser(userID);
+  let response = {
     me: userID,
-    game: game // getGameForUser(userID)
-  });
+    game: myGame
+  };
+  res.send(response);
 }
 
 function playersDice(diceCount) {

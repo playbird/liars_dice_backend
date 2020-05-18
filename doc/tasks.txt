@@ -18,4 +18,8 @@ Features for MVP:
 	- random dice are assigned to each member
 	- one dice at a time can be removed from the game (from a single player)
 	- HTML frontend represents players and their dice (only showing dice values to the person who holds them)
+
+Version 1.0 Tasks
+	- Refresh does not create a new user.
+	- Multiple games
 		
