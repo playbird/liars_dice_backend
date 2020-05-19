@@ -11,41 +11,58 @@ const game = {
 function getUserCount() {
   let count = game.users.length;
   return count;
-} 
+}
+
+// returns newly created random array of ints
+function playersDice(diceCount) {
+  var arr = [];
+  for (let i = 0; i < diceCount; i++ ) {
+    var roll = Math.ceil(Math.random() * 6);
+    arr.push(roll);
+  }
+  return arr;
+}
+
+// returns a newly created user object
+function getNewUser() {
+  let userID = Math.random().toString();
+  let newUser = {
+    id: userID,
+    dice: playersDice(5),
+    name: "player " + (getUserCount() + 1)
+  };
+  return newUser;
+}
 
 function rootHandler(req, res) {
   res.render('pages/index');
 }
 
 function getGameForUser(userID) {
-   let privateGame = {
+  let privateGame = {
     users: []
-    };
-   for (var i = 0; i < game.users.length; i++) { 
-    if (game.users[i].id == userID) {
+  };
+  for (var i = 0; i < getUserCount(); i++) {
+    let user = game.users[i];
+    if (user.id == userID) {
       privateGame.users.push(game.users[i]);
     } else {
       let otherUser =  {
-        id: game.users[i].id,
-        dice: game.users[i].dice.length,
-        name: game.users[i].name
+        id: user.id,
+        dice: user.dice.length,
+        name: user.name
       };
       privateGame.users.push(otherUser);
-      };
     }
+  }
   return privateGame;
 }
 
 function gamesHandler(req, res) {
   let userID = req.query.userID;
   if (userID == 'new') {
-    // if new user, create an ID, if not, skip to game
-    userID = Math.random().toString();
-    let newUser = {
-      id: userID,
-      dice: playersDice(5),
-      name: "player " + (getUserCount() + 1)
-    };
+    let newUser = getNewUser();
+    userID = newUser.id;
     game.users.push(newUser);
   }
   let myGame = getGameForUser(userID);
@@ -54,15 +71,6 @@ function gamesHandler(req, res) {
     game: myGame
   };
   res.send(response);
-}
-
-function playersDice(diceCount) {
-  var arr = [];
-  for (let i = 0; i < diceCount; i++ ) {
-    var roll = Math.ceil(Math.random() * 6);
-    arr.push(roll);
-  }
-  return arr;
 }
 
 express()
