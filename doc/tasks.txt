@@ -16,10 +16,19 @@ Randomly resort order of play after every round (optional)
 Features for MVP:
 	- at least two players can join the game
 	- random dice are assigned to each member
+	- only showing dice values to the person who holds them
+	- HTML frontend represents players and their dice
+	- button to initiate re-roll
+	- reveal/remove/re-roll (re-roll first)
 	- one dice at a time can be removed from the game (from a single player)
-	- HTML frontend represents players and their dice (only showing dice values to the person who holds them)
 
 Version 1.0 Tasks
-	- Refresh does not create a new user.
+	- Edit player name 
+	- Refresh does not create a new user. Game status remains.
 	- Multiple games
-		
+	- Bid functionality
+	- Winner is declared after each round
+	- Buttons 
+		- Liar! (add a confirmation pop up)
+		- Bid
+	- Shuffle player order between rounds (optional?)
