@@ -18,10 +18,16 @@ function drawGame(document, gameState, myID) {
   while (document.body.firstChild) {
     document.body.removeChild(document.body.firstChild);
   }
-  playerRow = document.createElement('h2');
-  playerRow.textContent = JSON.stringify(gameState);
-  document.body.appendChild(playerRow); 
-  
+  let userCount = gameState.users.length;
+  for (var i = 0; i < userCount; i++) {
+    let player = gameState.users[i].id;
+    let roll = gameState.users[i].dice;
+    let name = gameState.users[i].name;
+    let newDiv = document.createElement('div');
+    newDiv.className = 'div' + i;
+    document.body.appendChild(newDiv);
+    newDiv.textContent = player;
+  }
   let rerollButton = window.document.createElement('a');
   document.body.appendChild(rerollButton);
   rerollButton.textContent = "Re-roll";

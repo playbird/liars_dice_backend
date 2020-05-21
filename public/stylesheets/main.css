@@ -16,3 +16,13 @@ p {
   font-family: verdana;
   font-size: 20px;
 }
+
+div {
+  font-family: verdana;
+  font-size: 20px;
+}
+
+div.player1 {
+  font-family: verdana;
+  font-size: 30px;
+}
