@@ -1,0 +1,25 @@
+[ ] Any player can trigger a reroll that resets everyone's dice
+  [ ] There is a "Reroll" button on every player's screen
+  [ ] When a player hits the "Reroll" button it calls a local reroll() function
+  [ ] The local reroll function makes a POST request to the server's `/rolls` endpoint
+  [ ] The server has a `/rolls` endpoint that calls a rerollHandler() function
+  [ ] The reroll function assigns each player a new number for each of their dice
+
+************ First playable ************
+
+[ ] Any player can end the bidding phase of game play and expose all players' dice
+  [ ] There is a button on every player's screen
+  [ ] When a player hits this button a local "reveal()" function gets called
+  [ ] The local `reveal()` function makes a PUT request to the `users/dice` endpoint
+  [ ] The server has a `/users/dice` endpoint that calls a function
+  [ ] This function sets a `revealed` boolean value in the game object
+  [ ] getGameForUser() checks the value of this boolean and shows all dice values if `revealed` is true
+
+[ ] Any player can remove one of their own dice
+  [ ] The `reroll` button is renamed, and it's clear that it'll remove a die from whomever presses it.
+  [ ] When this button is clicked a local function is called (proably `reroll()` renamed to something more accurate).
+  [ ] This local function makes a PUT call to the server's `/users/dice` endpoint with this user's ID and the new
+      dice count in the query string.
+  [ ] The server has an endpoint `/users/dice` that takes a UserID and dice count
+
+************ MVP ************
