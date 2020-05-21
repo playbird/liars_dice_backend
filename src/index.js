@@ -20,19 +20,18 @@ function drawGame(document, gameState, myID) {
   }
   let userCount = gameState.users.length;
   for (var i = 0; i < userCount; i++) {
-    let player = gameState.users[i].id;
     let roll = gameState.users[i].dice;
     let name = gameState.users[i].name;
     let newDiv = document.createElement('div');
     newDiv.className = 'div' + i;
     document.body.appendChild(newDiv);
-    newDiv.textContent = player;
+    newDiv.textContent = name + ":  " + roll;  
   }
   let rerollButton = window.document.createElement('a');
   document.body.appendChild(rerollButton);
   rerollButton.textContent = "Re-roll";
   rerollButton.href = "#";
-  rerollButton.onclick = reRoll;
+  // rerollButton.onclick = reRoll;
 }
 
 module.exports = {
