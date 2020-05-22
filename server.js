@@ -80,4 +80,3 @@ express()
   .get('/', rootHandler)
   .get('/games', gamesHandler)
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
-

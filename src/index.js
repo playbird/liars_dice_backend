@@ -9,29 +9,34 @@ function getGame(userID) {
   return axios.get('/games?userID=' + userID);
 }
 
-function drawGame(document, gameState, myID) {
+function drawGame(gameState, myID) {
   // step 1: find the element with the ID (div)
   // step 2: find its parent and store it
   // step 3: remove the tagged element
   // step 4: make a new one
   // step 5: add the new one to the old one's parent
-  while (document.body.firstChild) {
-    document.body.removeChild(document.body.firstChild);
+  let doc = window.document;
+  while (doc.body.firstChild) {
+    doc.body.removeChild(doc.body.firstChild);
   }
   let userCount = gameState.users.length;
   for (var i = 0; i < userCount; i++) {
     let roll = gameState.users[i].dice;
     let name = gameState.users[i].name;
-    let newDiv = document.createElement('div');
+    let newDiv = doc.createElement('div');
     newDiv.className = 'div' + i;
-    document.body.appendChild(newDiv);
+    doc.body.appendChild(newDiv);
     newDiv.textContent = name + ":  " + roll;  
   }
-  let rerollButton = window.document.createElement('a');
-  document.body.appendChild(rerollButton);
+  let rerollButton = doc.createElement('a');
+  doc.body.appendChild(rerollButton);
   rerollButton.textContent = "Re-roll";
   rerollButton.href = "#";
-  // rerollButton.onclick = reRoll;
+  rerollButton.onclick = reRoll;
+}
+
+function reRoll() {
+  console.log("Listen to the new Queef record!")
 }
 
 module.exports = {
