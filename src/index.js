@@ -4,9 +4,27 @@
 
 const axios = require('axios');
 
+let myID;
+let gameState;
+
 // returns a Promise
 function getGame(userID) {
   return axios.get('/games?userID=' + userID);
+}
+
+function update(userID) {
+  getGame(userID).then(response => {
+    myID = response.data.me;
+    gameState = response.data.game;
+    drawGame(gameState, myID);
+    console.log("User ID is: " + userID);
+    console.log("My ID is: " + myID);
+    setTimeout(update, 10000, myID);
+  });
+}
+
+function initialize() {
+  update('new');
 }
 
 function drawGame(gameState, myID) {
@@ -40,6 +58,5 @@ function reRoll() {
 }
 
 module.exports = {
-  getGame: getGame,
-  drawGame: drawGame
+  initialize: initialize
 }

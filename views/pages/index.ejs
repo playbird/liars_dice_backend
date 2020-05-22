@@ -5,27 +5,8 @@
   <link rel="stylesheet" type="text/css" href="/stylesheets/main.css" >
   <script src="bundle.js"></script>
   <script type = "text/javascript">
-    let myID;
-    let gameState;
-
-    function update(userID) {
-      EntryPoint.getGame(userID).then(response => {
-        myID = response.data.me;
-        gameState = response.data.game;
-        EntryPoint.drawGame(gameState, myID);
-        console.log("User ID is: " + userID);
-        console.log("My ID is: " + myID);
-        setTimeout(update, 10000, myID);
-      });
-    }
-    function initialize() {
-      update('new');
-    }
-    window.onload = initialize;
-
+    window.onload = EntryPoint.initialize;
   </script>
-
 </head>
-
 <body></body>
 </html>
