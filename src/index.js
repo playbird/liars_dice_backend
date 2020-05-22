@@ -12,6 +12,16 @@ function getGame(userID) {
   return axios.get('/games?userID=' + userID);
 }
 
+function reRoll() {
+  axios.post('/reroll')
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+}
+
 function update(userID) {
   getGame(userID).then(response => {
     myID = response.data.me;
@@ -51,10 +61,6 @@ function drawGame(gameState, myID) {
   rerollButton.textContent = "Re-roll";
   rerollButton.href = "#";
   rerollButton.onclick = reRoll;
-}
-
-function reRoll() {
-  console.log("Listen to the new Queef record!")
 }
 
 module.exports = {

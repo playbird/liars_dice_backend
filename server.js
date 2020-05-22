@@ -73,10 +73,16 @@ function gamesHandler(req, res) {
   res.send(response);
 }
 
+function rollHandler(req, res) {
+  console.log("Queef rules!");
+  res.send();
+}
+
 express()
   .use(express.static(path.join(__dirname, 'public')))
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
   .get('/', rootHandler)
   .get('/games', gamesHandler)
+  .post('/reroll', rollHandler)
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
