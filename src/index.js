@@ -29,7 +29,7 @@ function update(userID) {
     drawGame(gameState, myID);
     console.log("User ID is: " + userID);
     console.log("My ID is: " + myID);
-    setTimeout(update, 10000, myID);
+    setTimeout(update, 1000, myID);
   });
 }
 

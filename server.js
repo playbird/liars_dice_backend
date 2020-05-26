@@ -74,7 +74,9 @@ function gamesHandler(req, res) {
 }
 
 function rollHandler(req, res) {
-  console.log("Queef rules!");
+  for (let i = 0; i < getUserCount(); i++) {
+    game.users[i].dice = playersDice(game.users[i].dice.length);
+  }
   res.send();
 }
 
