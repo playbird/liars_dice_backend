@@ -1,5 +1,5 @@
 body {
-  background-color: lightblue;
+  background-color: white;
 }
 
 h1 {
@@ -20,9 +20,89 @@ p {
 div {
   font-family: verdana;
   font-size: 20px;
+  padding-top: 20px;
+  padding-right: 30px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  border-style: solid;
+
 }
 
-div.player1 {
-  font-family: verdana;
-  font-size: 30px;
+div.div0 { 
+  color: black;
+  background-color: lightsalmon; 
+  position: relative;
+  left: 0px;
+  width: 300px;
+}
+
+div.div1 {
+  color: black;
+  background-color: lightblue;
+  position: relative;
+  left: 375px;
+  width: 300px;
+}
+
+div.div2 {
+  color: black;
+  background-color: lightsalmon; 
+  position: relative;
+  left: 0px;
+  width: 300px;
+}
+
+div.div3 {
+  color: black;
+  background-color: lightblue;
+  position: relative;
+  left: 375px;  width: 300px;
+}  
+
+div.div4 {
+  color: black;
+  background-color: lightsalmon; 
+  position: relative;
+  left: 0px;
+  width: 300px;
+}
+
+div.div5 {
+  color: black;
+  background-color: lightblue;
+  position: relative;
+  left: 375px;  
+  width: 300px;
+}
+
+div.div6 {
+  color: black;
+  background-color: lightsalmon; 
+  position: relative;
+  left: 0px;
+  width: 300px;
+}
+
+div.div7 {
+  color: black;
+  background-color: lightblue;
+  position: relative;
+  left: 375px;  
+  width: 300px;
+}
+
+div.div8 {
+  color: black;
+  background-color: lightsalmon; 
+  position: relative;
+  left: 0px;
+  width: 300px;
+}
+
+div.div9 {
+  color: black;
+  background-color: lightblue;
+  position: relative;
+  left: 375px;
+  width: 300px;
 }
