@@ -22,6 +22,16 @@ function reRoll() {
   });
 }
 
+function reveal() {
+  axios.post('/users/dice')
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+}
+
 function update(userID) {
   getGame(userID).then(response => {
     myID = response.data.me;
@@ -61,6 +71,12 @@ function drawGame(gameState, myID) {
   rerollButton.textContent = "Re-roll";
   rerollButton.href = "#";
   rerollButton.onclick = reRoll;
+
+  let revealButton = doc.createElement('a');
+  doc.body.appendChild(revealButton);
+  revealButton.textContent = " Liar! ";
+  revealButton.href = "#";
+  revealButton.onclick = reveal;
 }
 
 module.exports = {

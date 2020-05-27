@@ -5,7 +5,8 @@ const PORT = process.env.PORT || 5000
 
 //global game state
 const game = {
-  users: []
+  users: [],
+  reveal: false
 };
 
 function getUserCount() {
@@ -44,7 +45,7 @@ function getGameForUser(userID) {
   };
   for (var i = 0; i < getUserCount(); i++) {
     let user = game.users[i];
-    if (user.id == userID) {
+    if ((user.id == userID) || game.reveal) {
       privateGame.users.push(game.users[i]);
     } else {
       let otherUser =  {
@@ -77,6 +78,12 @@ function rollHandler(req, res) {
   for (let i = 0; i < getUserCount(); i++) {
     game.users[i].dice = playersDice(game.users[i].dice.length);
   }
+  game.reveal = false;
+  res.send();
+}
+
+function revealHandler(req, res) {
+  game.reveal = true;
   res.send();
 }
 
@@ -87,4 +94,5 @@ express()
   .get('/', rootHandler)
   .get('/games', gamesHandler)
   .post('/reroll', rollHandler)
+  .post('/users/dice', revealHandler)
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
