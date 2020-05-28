@@ -32,6 +32,16 @@ function reveal() {
   });
 }
 
+function remove() {
+  axios.delete('/users/dice?userID=' + myID)
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  })
+}
+
 function update(userID) {
   getGame(userID).then(response => {
     myID = response.data.me;
@@ -77,6 +87,12 @@ function drawGame(gameState, myID) {
   revealButton.textContent = " Liar! ";
   revealButton.href = "#";
   revealButton.onclick = reveal;
+
+  let removeButton = doc.createElement('a');
+  doc.body.appendChild(removeButton);
+  removeButton.textContent = " Remove a dice ";
+  removeButton.href = "#";
+  removeButton.onclick = remove;
 }
 
 module.exports = {

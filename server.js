@@ -87,6 +87,12 @@ function revealHandler(req, res) {
   res.send();
 }
 
+function removeHandler(req, res) {
+  let userID = req.query.userID;
+  console.log(userID);
+  res.send();
+}
+
 express()
   .use(express.static(path.join(__dirname, 'public')))
   .set('views', path.join(__dirname, 'views'))
@@ -95,4 +101,5 @@ express()
   .get('/games', gamesHandler)
   .post('/reroll', rollHandler)
   .post('/users/dice', revealHandler)
+  .delete('/users/dice', removeHandler)
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
