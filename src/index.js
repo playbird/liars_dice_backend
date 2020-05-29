@@ -76,19 +76,22 @@ function drawGame(gameState, myID) {
     doc.body.appendChild(newDiv);
     newDiv.textContent = name + ":  " + roll;  
   }
-  let rerollButton = doc.createElement('a');
+
+  let rerollButton = doc.createElement('button');
   doc.body.appendChild(rerollButton);
   rerollButton.textContent = "Re-roll";
   rerollButton.href = "#";
   rerollButton.onclick = reRoll;
+  doc.body.appendChild( document.createTextNode( '\u00A0\u00A0' ) );
 
-  let revealButton = doc.createElement('a');
+  let revealButton = doc.createElement('button');
   doc.body.appendChild(revealButton);
   revealButton.textContent = " Liar! ";
   revealButton.href = "#";
   revealButton.onclick = reveal;
+  doc.body.appendChild( document.createTextNode( '\u00A0\u00A0' ) );
 
-  let removeButton = doc.createElement('a');
+  let removeButton = doc.createElement('button');
   doc.body.appendChild(removeButton);
   removeButton.textContent = " Remove a dice ";
   removeButton.href = "#";

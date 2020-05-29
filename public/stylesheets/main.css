@@ -30,7 +30,7 @@ div {
 
 div.div0 { 
   color: black;
-  background-color: lightsalmon; 
+  background-color: #ffffff; 
   position: relative;
   left: 0px;
   width: 300px;
@@ -38,7 +38,7 @@ div.div0 {
 
 div.div1 {
   color: black;
-  background-color: lightblue;
+  background-color: #ffffff;
   position: relative;
   left: 375px;
   width: 300px;
@@ -46,7 +46,7 @@ div.div1 {
 
 div.div2 {
   color: black;
-  background-color: lightsalmon; 
+  background-color: #cccccc; 
   position: relative;
   left: 0px;
   width: 300px;
@@ -54,14 +54,14 @@ div.div2 {
 
 div.div3 {
   color: black;
-  background-color: lightblue;
+  background-color: #cccccc;
   position: relative;
   left: 375px;  width: 300px;
 }  
 
 div.div4 {
   color: black;
-  background-color: lightsalmon; 
+  background-color: #ffffff; 
   position: relative;
   left: 0px;
   width: 300px;
@@ -69,7 +69,7 @@ div.div4 {
 
 div.div5 {
   color: black;
-  background-color: lightblue;
+  background-color: #ffffff;
   position: relative;
   left: 375px;  
   width: 300px;
@@ -77,7 +77,7 @@ div.div5 {
 
 div.div6 {
   color: black;
-  background-color: lightsalmon; 
+  background-color: #cccccc; 
   position: relative;
   left: 0px;
   width: 300px;
@@ -85,7 +85,7 @@ div.div6 {
 
 div.div7 {
   color: black;
-  background-color: lightblue;
+  background-color: #cccccc;
   position: relative;
   left: 375px;  
   width: 300px;
@@ -93,7 +93,7 @@ div.div7 {
 
 div.div8 {
   color: black;
-  background-color: lightsalmon; 
+  background-color: #ffffff; 
   position: relative;
   left: 0px;
   width: 300px;
@@ -101,8 +101,50 @@ div.div8 {
 
 div.div9 {
   color: black;
-  background-color: lightblue;
+  background-color: #ffffff;
   position: relative;
   left: 375px;
   width: 300px;
+}
+
+a:link {
+  color: red;
+}
+
+/* visited link */
+a:visited {
+  color: green;
+}
+
+/* mouse over link */
+a:hover {
+  color: hotpink;
+}
+
+/* selected link */
+a:active {
+  color: blue;
+}
+
+button {
+	background-color:#1e59bd;
+	border-radius:7px;
+	border:2px solid #4e6096;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Verdana;
+	font-size:14px;
+	font-weight:normal;
+	padding:9px 39px;
+	text-decoration:none;
+  text-shadow:0px 1px 0px #283966;
+  margin-top: 20px;
+}
+button:hover {
+	background-color:#476e9e;
+}
+button:active {
+	position:relative;
+	top:1px;
 }
