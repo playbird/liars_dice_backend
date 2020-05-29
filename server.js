@@ -89,7 +89,12 @@ function revealHandler(req, res) {
 
 function removeHandler(req, res) {
   let userID = req.query.userID;
-  console.log(userID);
+  for (var i = 0; i < getUserCount(); i++) {
+    let loser = game.users[i].id;
+    if (loser == userID) {
+      game.users[i].dice.length -- ;
+    }
+  }
   res.send();
 }
 
