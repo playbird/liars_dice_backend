@@ -46,7 +46,7 @@ div.div1 {
 
 div.div2 {
   color: black;
-  background-color: #cccccc; 
+  background-color: #ffffff; 
   position: relative;
   left: 0px;
   width: 300px;
@@ -54,7 +54,7 @@ div.div2 {
 
 div.div3 {
   color: black;
-  background-color: #cccccc;
+  background-color: #ffffff;
   position: relative;
   left: 375px;  width: 300px;
 }  
