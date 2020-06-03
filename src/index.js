@@ -13,6 +13,10 @@ function getGame(userID) {
   return axios.get('/games?userID=' + userID);
 }
 
+function createUser(displayName) {
+  return axios.post('/users?displayName=' + displayName);
+}
+
 function reRoll() {
   axios.post('/reroll')
   .then(function (response) {
@@ -45,7 +49,6 @@ function remove() {
 
 function update(userID) {
   getGame(userID).then(response => {
-    myID = response.data.me;
     gameState = response.data.game;
     drawGame(gameState, myID);
     setTimeout(update, 1000, myID);
@@ -56,10 +59,11 @@ function initialize() {
   displayName = prompt("Type your name and click OK", "New Player");
   if (displayName == "") {
     displayName = "New Player";
-    update('new_user' + displayName);
-  } else {
-  update('new_user' + displayName);
-  }
+  } 
+  createUser(displayName).then(response => {
+    myID = response.data.me;
+    update(myID);
+  });
 }
 
 function drawGame(gameState, myID) {

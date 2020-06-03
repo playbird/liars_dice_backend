@@ -25,15 +25,20 @@ function playersDice(diceCount) {
 }
 
 // returns a newly created user object
-function getNewUser(userID) {
-  let userName = userID;
-  userID = Math.random().toString();
-  let newUser = {
-    id: userID,
-    dice: playersDice(5),
-    name: userName.substring(8) 
-  };
-  return newUser;
+function createUserHandler(req, res) {
+  console.log('queef!');
+  
+  // let userName = userID;
+  // userID = Math.random().toString();
+  // let newUser = getNewUser(userID);
+  //   userID = newUser.id;
+  //   game.users.push(newUser);
+  // let newUser = {
+  //   id: userID,
+  //   dice: playersDice(5),
+  //   name: userName.substring(8) 
+  // };
+  // return newUser;
 }
 
 function rootHandler(req, res) {
@@ -62,11 +67,9 @@ function getGameForUser(userID) {
 
 function gamesHandler(req, res) {
   let userID = req.query.userID;
-  if (userID.startsWith("new_user")) {
     let newUser = getNewUser(userID);
     userID = newUser.id;
     game.users.push(newUser);
-  }
   let myGame = getGameForUser(userID);
   let response = {
     me: userID,
@@ -104,6 +107,7 @@ express()
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
   .get('/', rootHandler)
+  .post('/users', createUserHandler)
   .get('/games', gamesHandler)
   .post('/reroll', rollHandler)
   .post('/users/dice', revealHandler)
