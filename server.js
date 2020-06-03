@@ -25,12 +25,13 @@ function playersDice(diceCount) {
 }
 
 // returns a newly created user object
-function getNewUser() {
-  let userID = Math.random().toString();
+function getNewUser(userID) {
+  let userName = userID;
+  userID = Math.random().toString();
   let newUser = {
     id: userID,
     dice: playersDice(5),
-    name: "player " + (getUserCount() + 1)
+    name: userName.substring(8) 
   };
   return newUser;
 }
@@ -61,8 +62,8 @@ function getGameForUser(userID) {
 
 function gamesHandler(req, res) {
   let userID = req.query.userID;
-  if (userID == 'new') {
-    let newUser = getNewUser();
+  if (userID.startsWith("new_user")) {
+    let newUser = getNewUser(userID);
     userID = newUser.id;
     game.users.push(newUser);
   }

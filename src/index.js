@@ -6,6 +6,7 @@ const axios = require('axios');
 
 let myID;
 let gameState;
+let displayName;
 
 // returns a Promise
 function getGame(userID) {
@@ -47,14 +48,18 @@ function update(userID) {
     myID = response.data.me;
     gameState = response.data.game;
     drawGame(gameState, myID);
-    console.log("User ID is: " + userID);
-    console.log("My ID is: " + myID);
     setTimeout(update, 1000, myID);
   });
 }
 
 function initialize() {
-  update('new');
+  displayName = prompt("Type your name and click OK", "New Player");
+  if (displayName == "") {
+    displayName = "New Player";
+    update('new_user' + displayName);
+  } else {
+  update('new_user' + displayName);
+  }
 }
 
 function drawGame(gameState, myID) {
