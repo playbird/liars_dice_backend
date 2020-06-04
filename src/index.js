@@ -56,12 +56,14 @@ function update(userID) {
 }
 
 function initialize() {
+  drawButtons();
   displayName = prompt("Type your name and click OK", "New Player");
   if (displayName == "") {
     displayName = "New Player";
   } 
   createUser(displayName).then(response => {
-    myID = response.data.me;
+    myID = response.data.id;
+    console.log(response.data);
     update(myID);
   });
 }
@@ -73,8 +75,9 @@ function drawGame(gameState, myID) {
   // step 4: make a new one
   // step 5: add the new one to the old one's parent
   let doc = window.document;
-  while (doc.body.firstChild) {
-    doc.body.removeChild(doc.body.firstChild);
+  let gameDiv = document.getElementById('game');
+  while (gameDiv.firstChild) {
+    gameDiv.removeChild(gameDiv.firstChild);
   }
   let userCount = gameState.users.length;
   for (var i = 0; i < userCount; i++) {
@@ -82,10 +85,12 @@ function drawGame(gameState, myID) {
     let name = gameState.users[i].name;
     let newDiv = doc.createElement('div');
     newDiv.className = 'div' + i;
-    doc.body.appendChild(newDiv);
+    gameDiv.appendChild(newDiv);
     newDiv.textContent = name + ":  " + roll;  
   }
-
+}
+function drawButtons() {
+  let doc = window.document;
   let rerollButton = doc.createElement('button');
   doc.body.appendChild(rerollButton);
   rerollButton.textContent = "Re-roll";
