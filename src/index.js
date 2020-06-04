@@ -89,6 +89,7 @@ function drawGame(gameState, myID) {
     newDiv.textContent = name + ":  " + roll;  
   }
 }
+
 function drawButtons() {
   let doc = window.document;
   let rerollButton = doc.createElement('button');
