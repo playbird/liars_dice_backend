@@ -16,9 +16,9 @@ function getUserCount() {
 
 // returns newly created random array of ints
 function playersDice(diceCount) {
-  var arr = [];
+  let arr = [];
   for (let i = 0; i < diceCount; i++ ) {
-    var roll = Math.ceil(Math.random() * 6);
+    let roll = Math.ceil(Math.random() * 6);
     arr.push(roll);
   }
   return arr;
@@ -27,7 +27,6 @@ function playersDice(diceCount) {
 // returns a newly created user object
 function createUserHandler(req, res) {
   let displayName = req.query.displayName;
-  console.log(displayName);
   let userID = Math.random().toString();
   let newUser = {
     id: userID,
@@ -97,6 +96,14 @@ function removeHandler(req, res) {
   res.send();
 }
 
+function newGameHandler(req, res) {
+  for (var i = 0; i < getUserCount(); i++) {
+    let user = game.users[i];
+    user.dice = playersDice(5);
+  }  
+  res.send();
+}
+
 express()
   .use(express.static(path.join(__dirname, 'public')))
   .set('views', path.join(__dirname, 'views'))
@@ -105,5 +112,6 @@ express()
   .post('/users', createUserHandler)
   .get('/games', gamesHandler)
   .post('/users/dice', revealHandler)
+  .post('/games', newGameHandler)
   .delete('/users/dice', removeHandler)
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))

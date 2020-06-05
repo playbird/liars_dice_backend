@@ -17,16 +17,6 @@ function createUser(displayName) {
   return axios.post('/users?displayName=' + displayName);
 }
 
-function reRoll() {
-  axios.post('/reroll')
-  .then(function (response) {
-    console.log(response);
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
-}
-
 function reveal() {
   axios.post('/users/dice')
   .then(function (response) {
@@ -45,6 +35,17 @@ function remove() {
   .catch(function (error) {
     console.log(error);
   })
+}
+
+function newGame() {
+  console.log(' new game ');
+  axios.post('/games')
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 }
 
 function update(userID) {
@@ -92,7 +93,7 @@ function drawGame(gameState, myID) {
 
 function drawButtons() {
   let doc = window.document;
-  
+
   let revealButton = doc.createElement('button');
   doc.body.appendChild(revealButton);
   revealButton.textContent = " Liar! ";
@@ -105,6 +106,13 @@ function drawButtons() {
   removeButton.textContent = " Remove a dice ";
   removeButton.href = "#";
   removeButton.onclick = remove;
+
+  doc.body.appendChild( document.createTextNode( '\u00A0\u00A0' ) );
+  let newGameButton = doc.createElement('button');
+  doc.body.appendChild(newGameButton);
+  newGameButton.textContent = " Play Again? ";
+  newGameButton.href = "#";
+  newGameButton.onclick = newGame;
 }
 
 module.exports = {
