@@ -38,7 +38,6 @@ function remove() {
 }
 
 function newGame() {
-  console.log(' new game ');
   axios.post('/games')
   .then(function (response) {
     console.log(response);

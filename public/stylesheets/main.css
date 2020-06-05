@@ -31,90 +31,130 @@ div.div0 {
   color: black;
   background-color: #ffffff; 
   position: relative;
+  margin: 2px 2px 2px 2px;
   left: 0px;
   width: 300px;
   border-style: solid;
+  border-width: 1px;
+  border-color: blue;
+  border-radius: 5px;
 }
 
 div.div1 {
   color: black;
   background-color: #ffffff;
   position: relative;
-  left: 375px;
+  margin: 2px 2px 2px 2px;
+  left: 0px;
   width: 300px;
   border-style: solid;
+  border-width: 1px;
+  border-color: blue;
+  border-radius: 5px;
 }
 
 div.div2 {
   color: black;
   background-color: #ffffff; 
   position: relative;
+  margin: 2px 2px 2px 2px;
   left: 0px;
   width: 300px;
   border-style: solid;
+  border-width: 1px;
+  border-color: blue;
+  border-radius: 5px;
 }
 
 div.div3 {
   color: black;
   background-color: #ffffff;
   position: relative;
-  left: 375px;  width: 300px;
+  margin: 2px 2px 2px 2px;
+  left: 0px;  width: 300px;
   width: 300px;
   border-style: solid;
+  border-width: 1px;
+  border-color: blue;
+  border-radius: 5px;
 }  
 
 div.div4 {
   color: black;
   background-color: #ffffff; 
   position: relative;
+  margin: 2px 2px 2px 2px;
   left: 0px;
   width: 300px;
   border-style: solid;
+  border-width: 1px;
+  border-color: blue;
+  border-radius: 5px;
 }
 
 div.div5 {
   color: black;
   background-color: #ffffff;
   position: relative;
-  left: 375px;  
+  margin: 2px 2px 2px 2px;
+  left: 0px;  
   width: 300px;
   border-style: solid;
+  border-width: 1px;
+  border-color: blue;
+  border-radius: 5px;
 }
 
 div.div6 {
   color: black;
   background-color: #ffffff; 
   position: relative;
+  margin: 2px 2px 2px 2px;
   left: 0px;
-  width: 300px;
+  width: 0px;
   border-style: solid;
+  border-width: 1px;
+  border-color: blue;
+  border-radius: 5px;
 }
 
 div.div7 {
   color: black;
   background-color: #ffffff;
   position: relative;
-  left: 375px;  
+  margin: 2px 2px 2px 2px;
+  left: 0px;  
   width: 300px;
   border-style: solid;
+  border-width: 1px;
+  border-color: blue;
+  border-radius: 5px;
 }
 
 div.div8 {
   color: black;
   background-color: #ffffff; 
   position: relative;
+  margin: 2px 2px 2px 2px;
   left: 0px;
   width: 300px;
   border-style: solid;
+  border-width: 1px;
+  border-color: blue;
+  border-radius: 5px;
 }
 
 div.div9 {
   color: black;
   background-color: #ffffff;
   position: relative;
-  left: 375px;
+  margin: 2px 2px 2px 2px;
+  left: 0px;
   width: 300px;
   border-style: solid;
+  border-width: 1px;
+  border-color: blue;
+  border-radius: 5px;
 }
 
 a:link {
