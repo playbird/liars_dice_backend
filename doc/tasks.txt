@@ -24,9 +24,15 @@ Features for MVP:
 
 Version 1.0 Tasks
 	- Edit player name 
+	- Show number of dice
+	- Remove a dice rerolls
 	- Refresh does not create a new user. Game status remains.
-	- Multiple games
-	- Bid functionality
+	- Bid functionality:
+		- First person clicks Bid button (any bid is allowed)
+		- Next person clicks either Bid or Liar. If Bid, bid must be higher than the last to be valid.
+		- When someone clicks the Liar button, game loser is determined and a message appears to all who lost.
+		- Dice automatically removed from loser and dice are rerolled.
+		- Person after the loser begins the next round.
 	- Winner is declared after each round
 	- Buttons 
 		- Liar! (add a confirmation pop up)

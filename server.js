@@ -73,12 +73,11 @@ function gamesHandler(req, res) {
   res.send(response);
 }
 
-function rollHandler(req, res) {
+function reroll() {
   for (let i = 0; i < getUserCount(); i++) {
     game.users[i].dice = playersDice(game.users[i].dice.length);
   }
   game.reveal = false;
-  res.send();
 }
 
 function revealHandler(req, res) {
@@ -93,6 +92,7 @@ function removeHandler(req, res) {
     if (loser == userID) {
       game.users[i].dice.length -- ;
     }
+    reroll();
   }
   res.send();
 }
@@ -104,7 +104,6 @@ express()
   .get('/', rootHandler)
   .post('/users', createUserHandler)
   .get('/games', gamesHandler)
-  .post('/reroll', rollHandler)
   .post('/users/dice', revealHandler)
   .delete('/users/dice', removeHandler)
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))

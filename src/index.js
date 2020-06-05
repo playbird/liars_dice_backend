@@ -92,13 +92,7 @@ function drawGame(gameState, myID) {
 
 function drawButtons() {
   let doc = window.document;
-  let rerollButton = doc.createElement('button');
-  doc.body.appendChild(rerollButton);
-  rerollButton.textContent = "Re-roll";
-  rerollButton.href = "#";
-  rerollButton.onclick = reRoll;
-  doc.body.appendChild( document.createTextNode( '\u00A0\u00A0' ) );
-
+  
   let revealButton = doc.createElement('button');
   doc.body.appendChild(revealButton);
   revealButton.textContent = " Liar! ";
