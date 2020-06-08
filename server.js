@@ -99,9 +99,13 @@ function removeHandler(req, res) {
 function newGameHandler(req, res) {
   for (var i = 0; i < getUserCount(); i++) {
     let user = game.users[i];
+    let userID = req.query.userID;
     user.dice = playersDice(5);
-  }  
+    if (user.id == userID) {
+      revealHandler();
+    } 
   res.send();
+  }
 }
 
 express()

@@ -26,7 +26,10 @@ Version 1.0 Tasks
 	- Edit player name 
 	- Show number of dice
 	- Remove a dice rerolls
-	- Refresh does not create a new user. Game status remains.
+	- Fix bug: Play again needs to re-hide dice.
+	- Hide Play Again button until the game is over (only one user has dice). Hide Liar! button when game is over.
+	- Differentiate dice from the number of dice.
+	- Users out of dice should disappear? Gray out? 
 	- Bid functionality:
 		- First person clicks Bid button (any bid is allowed)
 		- Next person clicks either Bid or Liar. If Bid, bid must be higher than the last to be valid.
@@ -34,7 +37,5 @@ Version 1.0 Tasks
 		- Dice automatically removed from loser and dice are rerolled.
 		- Person after the loser begins the next round.
 	- Winner is declared after each round
-	- Buttons 
-		- Liar! (add a confirmation pop up)
-		- Bid
+	- Refresh does not create a new user. Game status remains.
 	- Shuffle player order between rounds (optional?)
