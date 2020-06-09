@@ -14,6 +14,21 @@ function getUserCount() {
   return count;
 }
 
+function isGameOver() {
+  let users = game.users;
+  let usersWithDice = 0;
+  for (let i = 0; i < users.length; i++) {
+    if (users[i].dice.length >= 1) {
+      usersWithDice ++;
+    }
+  }
+  if ((usersWithDice <= 1) && (users.length > 1))  {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 // returns newly created random array of ints
 function playersDice(diceCount) {
   let arr = [];
@@ -44,7 +59,8 @@ function rootHandler(req, res) {
 
 function getGameForUser(userID) {
   let privateGame = {
-    users: []
+    users: [],
+    isOver: isGameOver()
   };
   for (var i = 0; i < getUserCount(); i++) {
     let user = game.users[i];
