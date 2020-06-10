@@ -7,6 +7,7 @@ const axios = require('axios');
 let myID;
 let gameState;
 let displayName;
+let isOver;
 
 // returns a Promise
 function getGame(userID) {
@@ -45,11 +46,28 @@ function newGame() {
   .catch(function (error) {
     console.log(error);
   });
+  showPlayButtons()
+}
+
+function showPlayButtons() {
+  document.getElementById('reveal').style.display = 'inline';
+  document.getElementById('remove').style.display = 'inline';
+  document.getElementById('newGame').style.display = 'none';
+}
+
+function showNewGameButton() {
+  document.getElementById('reveal').style.display = 'none';
+  document.getElementById('remove').style.display = 'none';
+  document.getElementById('newGame').style.display = 'inline';
 }
 
 function update(userID) {
   getGame(userID).then(response => {
     gameState = response.data.game;
+    isOver = response.data.game.isOver;
+    if (isOver) {
+      showNewGameButton();
+    }
     drawGame(gameState, myID);
     setTimeout(update, 1000, myID);
   });
@@ -95,6 +113,7 @@ function drawButtons() {
 
   let revealButton = doc.createElement('button');
   doc.body.appendChild(revealButton);
+  revealButton.id = 'reveal';
   revealButton.textContent = " Liar! ";
   revealButton.href = "#";
   revealButton.onclick = reveal;
@@ -102,13 +121,16 @@ function drawButtons() {
 
   let removeButton = doc.createElement('button');
   doc.body.appendChild(removeButton);
+  removeButton.id = 'remove';
   removeButton.textContent = " Remove a dice ";
   removeButton.href = "#";
   removeButton.onclick = remove;
-
   doc.body.appendChild( document.createTextNode( '\u00A0\u00A0' ) );
+  
   let newGameButton = doc.createElement('button');
   doc.body.appendChild(newGameButton);
+  newGameButton.id = 'newGame';
+  newGameButton.style.display = 'none';
   newGameButton.textContent = " Play Again? ";
   newGameButton.href = "#";
   newGameButton.onclick = newGame;
