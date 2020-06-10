@@ -46,7 +46,7 @@ function newGame() {
   .catch(function (error) {
     console.log(error);
   });
-  showPlayButtons()
+  // showPlayButtons()
 }
 
 function showPlayButtons() {
@@ -67,6 +67,8 @@ function update(userID) {
     isOver = response.data.game.isOver;
     if (isOver) {
       showNewGameButton();
+    } else {
+      showPlayButtons();
     }
     drawGame(gameState, myID);
     setTimeout(update, 1000, myID);
