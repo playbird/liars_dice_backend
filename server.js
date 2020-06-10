@@ -82,7 +82,6 @@ function gamesHandler(req, res) {
   let userID = req.query.userID;
   let myGame = getGameForUser(userID);
   let response = {
-    me: userID,
     game: myGame
   };
   res.send(response);
