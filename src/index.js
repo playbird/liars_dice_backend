@@ -95,16 +95,23 @@ function drawGame(gameState, myID) {
   }
   let userCount = gameState.users.length;
   let diceCountDiv = doc.createElement('div');
-  diceCountDiv.classname = 'diceCount';
+  diceCountDiv.className = 'diceCount';
   gameDiv.appendChild(diceCountDiv);
   diceCountDiv.textContent = "There are  " + gameState.diceTotal + " dice in the game";  
   for (var i = 0; i < userCount; i++) {
     let roll = gameState.users[i].dice;
     let name = gameState.users[i].name;
-    let newDiv = doc.createElement('div');
-    newDiv.className = 'div' + i;
-    gameDiv.appendChild(newDiv);
-    newDiv.textContent = name + ":  " + roll;  
+    let player = doc.createElement('div');
+    player.className = 'player';
+    let explayer = doc.createElement('div');
+    explayer.className = 'explayer';
+    if (gameState.users[i].dice.length == 0) {
+      gameDiv.appendChild(explayer);
+      explayer.textContent = name + " is a loser!";  
+    } else {
+      gameDiv.appendChild(player);
+      player.textContent = name + ":  " + roll;  
+    }
   }
 }
 

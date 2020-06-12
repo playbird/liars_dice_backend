@@ -24,10 +24,14 @@ div {
   padding-right: 30px;
   padding-bottom: 20px;
   padding-left: 20px;
-  background-color: lightblue; 
+  background-color: white; 
 }
 
-div.div0 { 
+div.diceCount {
+  font-family: verdana;
+}
+
+div.player { 
   color: black;
   background-color: #ffffff; 
   position: relative;
@@ -40,113 +44,9 @@ div.div0 {
   border-radius: 5px;
 }
 
-div.div1 {
+div.explayer { 
   color: black;
-  background-color: #ffffff;
-  position: relative;
-  margin: 2px 2px 2px 2px;
-  left: 0px;
-  width: 300px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: blue;
-  border-radius: 5px;
-}
-
-div.div2 {
-  color: black;
-  background-color: #ffffff; 
-  position: relative;
-  margin: 2px 2px 2px 2px;
-  left: 0px;
-  width: 300px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: blue;
-  border-radius: 5px;
-}
-
-div.div3 {
-  color: black;
-  background-color: #ffffff;
-  position: relative;
-  margin: 2px 2px 2px 2px;
-  left: 0px;  width: 300px;
-  width: 300px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: blue;
-  border-radius: 5px;
-}  
-
-div.div4 {
-  color: black;
-  background-color: #ffffff; 
-  position: relative;
-  margin: 2px 2px 2px 2px;
-  left: 0px;
-  width: 300px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: blue;
-  border-radius: 5px;
-}
-
-div.div5 {
-  color: black;
-  background-color: #ffffff;
-  position: relative;
-  margin: 2px 2px 2px 2px;
-  left: 0px;  
-  width: 300px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: blue;
-  border-radius: 5px;
-}
-
-div.div6 {
-  color: black;
-  background-color: #ffffff; 
-  position: relative;
-  margin: 2px 2px 2px 2px;
-  left: 0px;
-  width: 0px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: blue;
-  border-radius: 5px;
-}
-
-div.div7 {
-  color: black;
-  background-color: #ffffff;
-  position: relative;
-  margin: 2px 2px 2px 2px;
-  left: 0px;  
-  width: 300px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: blue;
-  border-radius: 5px;
-}
-
-div.div8 {
-  color: black;
-  background-color: #ffffff; 
-  position: relative;
-  margin: 2px 2px 2px 2px;
-  left: 0px;
-  width: 300px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: blue;
-  border-radius: 5px;
-}
-
-div.div9 {
-  color: black;
-  background-color: #ffffff;
+  background-color: #888888; 
   position: relative;
   margin: 2px 2px 2px 2px;
   left: 0px;
