@@ -46,7 +46,6 @@ function newGame() {
   .catch(function (error) {
     console.log(error);
   });
-  // showPlayButtons()
 }
 
 function showPlayButtons() {
@@ -89,17 +88,16 @@ function initialize() {
 }
 
 function drawGame(gameState, myID) {
-  // step 1: find the element with the ID (div)
-  // step 2: find its parent and store it
-  // step 3: remove the tagged element
-  // step 4: make a new one
-  // step 5: add the new one to the old one's parent
   let doc = window.document;
   let gameDiv = document.getElementById('game');
   while (gameDiv.firstChild) {
     gameDiv.removeChild(gameDiv.firstChild);
   }
   let userCount = gameState.users.length;
+  let diceCountDiv = doc.createElement('div');
+  diceCountDiv.classname = 'diceCount';
+  gameDiv.appendChild(diceCountDiv);
+  diceCountDiv.textContent = "There are  " + gameState.diceTotal + " dice in the game";  
   for (var i = 0; i < userCount; i++) {
     let roll = gameState.users[i].dice;
     let name = gameState.users[i].name;

@@ -39,6 +39,22 @@ function playersDice(diceCount) {
   return arr;
 }
 
+function diceAll() {
+  let count = 0;
+  for (let i = 0; i < game.users.length; i++) {
+    count = count + game.users[i].dice.length;
+  }
+  return count;
+}
+
+function anonymize(diceCount) {
+  let arr = [];
+  for (let i = 0; i < diceCount; i++) {
+    arr.push('?');
+  }
+  return arr;
+}
+
 // returns a newly created user object
 function createUserHandler(req, res) {
   let displayName = req.query.displayName;
@@ -60,7 +76,8 @@ function rootHandler(req, res) {
 function getGameForUser(userID) {
   let privateGame = {
     users: [],
-    isOver: isGameOver()
+    isOver: isGameOver(),
+    diceTotal: diceAll()
   };
   for (var i = 0; i < getUserCount(); i++) {
     let user = game.users[i];
@@ -68,8 +85,7 @@ function getGameForUser(userID) {
       privateGame.users.push(game.users[i]);
     } else {
       let otherUser =  {
-        id: user.id,
-        dice: user.dice.length,
+        dice: anonymize(game.users[i].dice.length), 
         name: user.name
       };
       privateGame.users.push(otherUser);
