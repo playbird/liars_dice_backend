@@ -33,6 +33,7 @@ div.diceCount {
 
 div.player { 
   color: black;
+  text-align: right;
   background-color: #ffffff; 
   position: relative;
   margin: 2px 2px 2px 2px;
@@ -45,8 +46,9 @@ div.player {
 }
 
 div.explayer { 
-  color: black;
-  background-color: #888888; 
+  color: white;
+  text-align: right;
+  background-color: #666666; 
   position: relative;
   margin: 2px 2px 2px 2px;
   left: 0px;

@@ -87,6 +87,18 @@ function initialize() {
   });
 }
 
+function getImages(roll) {
+  let arr = [];
+  for (let i = 0; i < roll.length; i++) {
+    if (roll[i] === 0) {
+      arr.push('0.gif');
+    } else {
+      arr.push(roll[i] + '.gif');
+    }
+  }
+  return arr;
+} 
+
 function drawGame(gameState, myID) {
   let doc = window.document;
   let gameDiv = document.getElementById('game');
@@ -98,20 +110,28 @@ function drawGame(gameState, myID) {
   diceCountDiv.className = 'diceCount';
   gameDiv.appendChild(diceCountDiv);
   diceCountDiv.textContent = "There are  " + gameState.diceTotal + " dice in the game";  
-  for (var i = 0; i < userCount; i++) {
+  for (let i = 0; i < userCount; i++) {
     let roll = gameState.users[i].dice;
     let name = gameState.users[i].name;
     let player = doc.createElement('div');
-    player.className = 'player';
-    let explayer = doc.createElement('div');
-    explayer.className = 'explayer';
     if (gameState.users[i].dice.length == 0) {
-      gameDiv.appendChild(explayer);
-      explayer.textContent = name + " is a loser!";  
+      player.className = 'explayer';
+      player.textContent = name + " is out of the game";  
     } else {
-      gameDiv.appendChild(player);
-      player.textContent = name + ":  " + roll;  
+      player.className = 'player';
+      player.textContent = name + ":  ";
+      let imageRoll = getImages(roll);
+      for (let i = 0; i < imageRoll.length; i++) {
+        diceValue = roll[i] + '.gif';
+        let diceImg = doc.createElement('img');        
+        diceImg.setAttribute('src', '/images/' + diceValue);
+        diceImg.setAttribute('height', '32');
+        diceImg.setAttribute('width', '32');
+        document.getElementsByClassName('player');
+        player.appendChild(diceImg);
+      }    
     }
+    gameDiv.appendChild(player);
   }
 }
 

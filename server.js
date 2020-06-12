@@ -50,7 +50,7 @@ function diceAll() {
 function anonymize(diceCount) {
   let arr = [];
   for (let i = 0; i < diceCount; i++) {
-    arr.push('?');
+    arr.push('0');
   }
   return arr;
 }
