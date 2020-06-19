@@ -109,31 +109,47 @@ function drawGame(gameState, myID) {
   let diceCountDiv = doc.createElement('div');
   diceCountDiv.className = 'diceCount';
   gameDiv.appendChild(diceCountDiv);
-  diceCountDiv.textContent = "There are  " + gameState.diceTotal + " dice in the game";  
+  diceCountDiv.textContent = "There are  " + gameState.diceTotal + " dice in the game"; 
   for (let i = 0; i < userCount; i++) {
     let roll = gameState.users[i].dice;
     let name = gameState.users[i].name;
-    let player = doc.createElement('div');
-    if (gameState.users[i].dice.length == 0) {
-      player.className = 'explayer';
-      player.textContent = name + " is out of the game";  
-    } else {
-      player.className = 'player';
-      player.textContent = name + ":  ";
-      let imageRoll = getImages(roll);
-      for (let i = 0; i < imageRoll.length; i++) {
+    let users = gameState.users;
+    let player = doc.createElement('div');   
+    if (gameState.users[i].dice.length > 0) { 
+      if (i == 1) { 
+        player.className = 'it';
+        player.textContent = name + ":  ";
+        let imageRoll = getImages(roll);
+        for (let i = 0; i < imageRoll.length; i++) {
         diceValue = roll[i] + '.gif';
         let diceImg = doc.createElement('img');        
         diceImg.setAttribute('src', '/images/' + diceValue);
         diceImg.setAttribute('height', '32');
         diceImg.setAttribute('width', '32');
-        document.getElementsByClassName('player');
+        document.getElementsByClassName('it');
         player.appendChild(diceImg);
-      }    
+        }
+      } else if (i != 1) {
+          player.className = 'player';
+          player.textContent = name + ":  ";
+          let imageRoll = getImages(roll);
+          for (let i = 0; i < imageRoll.length; i++) {
+          diceValue = roll[i] + '.gif';
+          let diceImg = doc.createElement('img');        
+          diceImg.setAttribute('src', '/images/' + diceValue);
+          diceImg.setAttribute('height', '32');
+          diceImg.setAttribute('width', '32');
+          document.getElementsByClassName('player');
+          player.appendChild(diceImg);
+          }
+        } 
+    } else if (gameState.users[i].dice.length == 0) {
+        player.className = 'explayer';
+        player.textContent = name + " is observing";  
+      }  
+    gameDiv.appendChild(player); 
     }
-    gameDiv.appendChild(player);
   }
-}
 
 function drawButtons() {
   let doc = window.document;

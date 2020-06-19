@@ -45,6 +45,21 @@ div.player {
   border-radius: 5px;
 }
 
+div.it { 
+  color: black;
+  text-align: right;
+  background-color: yellow; 
+  background-image: url(..\images\arrow.gif);
+  position: relative;
+  margin: 2px 2px 2px 2px;
+  left: 0px;
+  width: 300px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: blue;
+  border-radius: 5px;
+}
+
 div.explayer { 
   color: white;
   text-align: right;

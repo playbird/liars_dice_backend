@@ -115,7 +115,14 @@ function revealHandler(req, res) {
   res.send();
 }
 
+function advanceItUser () {
+  let arr = game.users;
+  arr.push(arr.shift());
+  return game.users; 
+}
+
 function removeHandler(req, res) {
+  advanceItUser();
   let userID = req.query.userID;
   for (var i = 0; i < getUserCount(); i++) {
     let loser = game.users[i].id;
