@@ -32,27 +32,20 @@ Version 1.0 Tasks
 	X Users out of dice should disappear? Gray out? 
 
 	Bid functionality:
-	- People who hit the URL get a user ID and a name, but no dice and are "observers" (assigned as "explayers") They looke the same as players who are out of the game.
-	- When users click the new button "Join Game" they are assigned dice and made active. This can only occur when a game is not in progress.
-	- When game play starts, the players order is shuffled (randomly shuffle the array of users). The second player listed is "it" and has the
-		ability to create the first bid. Only this player can place a bid (can others see the bid controls?)
+	1. display users with "it" person in second position.
+	2. create a function that indexes who is "it" after each turn.
+	3. create a "i've bid button" which increments the "it" index by one.
+	- The array of users indicates the order of play. Second person goes first. After each round, order advances to next user.
+	- The second player listed is "it" and has the ability to create the first bid. Only this player can place a bid. Other uses can see current bid.
 	- The div at position number 2 is highlighted with a different color and a carrot on the left. Also, the bid controls appear to the right.
-	- The bid controls consist of a display of the number of dice, if a previous bid exists, an up arrow, a down arrow and a plus button to
-		add to the number of dice. The bid controls do not allow for a bid less than the current bid. If 3 sixes is the current bid, for example
-		the down 
-
-	- First person makes a bid (any bid is allowed). Default bid is one two. No Liar! button displayed.
-	- Next person makes a bid or clicks Liar!. If Bid, bid must be higher than the last to be valid. Open question: what kind of widget?
-	- When someone clicks the Liar button, game loser is determined and a message appears to all who lost.
-	- Dice automatically removed from loser and dice are rerolled.
-	- Person after the loser begins the next round.
-	- Winner is declared after each round
-	- Refresh does not create a new user. Game status remains.
-	- Shuffle player order between rounds (optional?)
-
-
-	Notes:
-	People click the Join Game button to become active players.
-	Optional: Shuffle button to randomly sort players before play begins.
-	Figure out: How to display person whose turn it is. Move highlight (with carrots) or move users?
-
+		OR, bid controls and current bid appear at the top.
+	- The bid controls display the current bid with controls (TBD) for the player to increase the number of dice or the dice value or both.
+	- When a player ends the round by clicking the Liar! button, the dice are revealed and the bid engine determines the winner (pop up notification?)
+		One dice is automatically removed from the losing player.
+	
+	Other Enhancements:
+	- People who hit the URL get a user ID and a name, but no dice and are "observers" (assigned as "explayers") They look the same 
+			as players who are out of the game. In the createUserHandler, 0 dice are assgned.
+	- When users click the new button "Join Game" they are assigned dice and made active. This can only occur when a game is not in progress.
+		Join Game
+	- When game play starts, the players order is shuffled (randomly shuffle the array of users). 

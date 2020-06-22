@@ -49,7 +49,9 @@ div.it {
   color: black;
   text-align: right;
   background-color: yellow; 
-  background-image: url(..\images\arrow.gif);
+  background-image: url('../images/arrow.gif');
+  background-repeat:no-repeat;
+  background-position:left center;
   position: relative;
   margin: 2px 2px 2px 2px;
   left: 0px;

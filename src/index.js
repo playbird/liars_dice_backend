@@ -38,6 +38,16 @@ function remove() {
   })
 }
 
+function bid() {
+  axios.post('/bids')
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  })
+}
+
 function newGame() {
   axios.post('/games')
   .then(function (response) {
@@ -50,12 +60,14 @@ function newGame() {
 
 function showPlayButtons() {
   document.getElementById('reveal').style.display = 'inline';
+  document.getElementById('bid').style.display = 'inline';
   document.getElementById('remove').style.display = 'inline';
   document.getElementById('newGame').style.display = 'none';
 }
 
 function showNewGameButton() {
   document.getElementById('reveal').style.display = 'none';
+  document.getElementById('bid').style.display = 'none';
   document.getElementById('remove').style.display = 'none';
   document.getElementById('newGame').style.display = 'inline';
 }
@@ -63,6 +75,7 @@ function showNewGameButton() {
 function update(userID) {
   getGame(userID).then(response => {
     gameState = response.data.game;
+    observeState = response.data.game.observers;
     isOver = response.data.game.isOver;
     if (isOver) {
       showNewGameButton();
@@ -70,6 +83,7 @@ function update(userID) {
       showPlayButtons();
     }
     drawGame(gameState, myID);
+    drawObservers(observeState);
     setTimeout(update, 1000, myID);
   });
 }
@@ -113,10 +127,8 @@ function drawGame(gameState, myID) {
   for (let i = 0; i < userCount; i++) {
     let roll = gameState.users[i].dice;
     let name = gameState.users[i].name;
-    let users = gameState.users;
     let player = doc.createElement('div');   
-    if (gameState.users[i].dice.length > 0) { 
-      if (i == 1) { 
+    if (i == 1) { 
         player.className = 'it';
         player.textContent = name + ":  ";
         let imageRoll = getImages(roll);
@@ -129,7 +141,7 @@ function drawGame(gameState, myID) {
         document.getElementsByClassName('it');
         player.appendChild(diceImg);
         }
-      } else if (i != 1) {
+      } else {
           player.className = 'player';
           player.textContent = name + ":  ";
           let imageRoll = getImages(roll);
@@ -142,16 +154,28 @@ function drawGame(gameState, myID) {
           document.getElementsByClassName('player');
           player.appendChild(diceImg);
           }
-        } 
-    } else if (gameState.users[i].dice.length == 0) {
-        player.className = 'explayer';
-        player.textContent = name + " is observing";  
-      }  
+        }  
     gameDiv.appendChild(player); 
     }
   }
+  
+  function drawObservers(observeState) {
+    let doc = window.document;
+    let observerDiv = document.getElementById('observer');
+    while (observerDiv.firstChild) {
+      observerDiv.removeChild(observerDiv.firstChild);
+    }
+    for (let i = 0; i < observeState.length; i++) {
+      let observer = doc.createElement('div');  
+      // debugger;
+      let name = observeState[i].name;
+      observer.className = 'observer';
+      observer.textContent =  name + ":  is watching";
+      observerDiv.appendChild(observer);
+    }
+  }
 
-function drawButtons() {
+  function drawButtons() {
   let doc = window.document;
 
   let revealButton = doc.createElement('button');
@@ -160,6 +184,14 @@ function drawButtons() {
   revealButton.textContent = " Liar! ";
   revealButton.href = "#";
   revealButton.onclick = reveal;
+  doc.body.appendChild( document.createTextNode( '\u00A0\u00A0' ) ); 
+  
+  let bidButton = doc.createElement('button');
+  doc.body.appendChild(bidButton);
+  bidButton.id = 'bid';
+  bidButton.textContent = " I Have Bid ";
+  bidButton.href = "#";
+  bidButton.onclick = bid;
   doc.body.appendChild( document.createTextNode( '\u00A0\u00A0' ) );
 
   let removeButton = doc.createElement('button');

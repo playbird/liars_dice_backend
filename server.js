@@ -6,6 +6,7 @@ const PORT = process.env.PORT || 5000
 //global game state
 const game = {
   users: [],
+  observers: [],
   reveal: false
 };
 
@@ -74,11 +75,14 @@ function rootHandler(req, res) {
 }
 
 function getGameForUser(userID) {
+  let obs = userToObserver(game);
   let privateGame = {
     users: [],
+    observers: obs,
     isOver: isGameOver(),
     diceTotal: diceAll()
   };
+  console.log(privateGame.observers);
   for (var i = 0; i < getUserCount(); i++) {
     let user = game.users[i];
     if ((user.id == userID) || game.reveal) {
@@ -92,6 +96,19 @@ function getGameForUser(userID) {
     }
   }
   return privateGame;
+}
+
+function userToObserver(game) {
+  for (let i = 0; i < getUserCount(); i++) {
+    let outOfGame;
+    if (game.users[i].dice.length == 0) {
+      outOfGame = game.users[i];
+      game.observers.push(outOfGame);
+      // console.log(outOfGame);
+      game.users.splice([i], 1);
+    }
+  }
+  return game.observers;
 }
 
 function gamesHandler(req, res) {
@@ -118,11 +135,9 @@ function revealHandler(req, res) {
 function advanceItUser () {
   let arr = game.users;
   arr.push(arr.shift());
-  return game.users; 
 }
 
 function removeHandler(req, res) {
-  advanceItUser();
   let userID = req.query.userID;
   for (var i = 0; i < getUserCount(); i++) {
     let loser = game.users[i].id;
@@ -146,6 +161,10 @@ function newGameHandler(req, res) {
   }
 }
 
+function bidHandler(req, res) {
+  advanceItUser();
+}
+
 express()
   .use(express.static(path.join(__dirname, 'public')))
   .set('views', path.join(__dirname, 'views'))
@@ -156,4 +175,5 @@ express()
   .post('/users/dice', revealHandler)
   .post('/games', newGameHandler)
   .delete('/users/dice', removeHandler)
+  .post('/bids', bidHandler)
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
