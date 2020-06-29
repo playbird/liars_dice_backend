@@ -8,6 +8,11 @@ let myID;
 let gameState;
 let displayName;
 let isOver;
+let latestBid = {
+  player: '',
+  diceVal: 0,
+  diceAmt: 1
+};
 
 // returns a Promise
 function getGame(userID) {
@@ -84,12 +89,13 @@ function update(userID) {
     }
     drawGame(gameState, myID);
     drawObservers(observeState);
-    setTimeout(update, 1000, myID);
+    setTimeout(update, 1500, myID);
   });
 }
 
 function initialize() {
   drawButtons();
+  drawBid();
   displayName = prompt("Type your name and click OK", "New Player");
   if (displayName == "") {
     displayName = "New Player";
@@ -167,16 +173,95 @@ function drawGame(gameState, myID) {
     }
     for (let i = 0; i < observeState.length; i++) {
       let observer = doc.createElement('div');  
-      // debugger;
       let name = observeState[i].name;
       observer.className = 'observer';
       observer.textContent =  name + ":  is watching";
       observerDiv.appendChild(observer);
     }
   }
+  
+  function drawBid() {
+    let doc = window.document;
+    let bidDiv = doc.getElementById('bidengine');
+    let mainCont = doc.getElementById('main');
+    let bidDiceVal = doc.createElement('div');
+    bidDiceVal.className = 'bidDiceVal';
+    let bidDiceAmt = doc.createElement('div');
+    bidDiceAmt.className = 'bidDiceAmt';
+    mainCont.appendChild(bidDiv);
+    bidDiv.appendChild(bidDiceVal);
+    bidDiv.appendChild(bidDiceAmt);
+    let increaseDiceNumber = doc.createElement('input');
+    let decreaseDiceNumber = doc.createElement('input');
+    let increaseDiceValue = doc.createElement('input');
+    let decreaseDiceValue = doc.createElement('input');
+    let diceValue = doc.createElement('img');
+    dVal = latestBid.diceVal;
+    increaseDiceNumber.setAttribute('type', 'image');
+    increaseDiceNumber.setAttribute('src', '/images/' + 'uparrow.gif'); 
+    increaseDiceNumber.setAttribute('height', '16');
+    increaseDiceNumber.setAttribute('width', '32');
+
+    bidDiceVal.appendChild(increaseDiceNumber);
+    let br1 = doc.createElement('br');
+    bidDiceVal.appendChild(br1);
+
+    if (dVal == 0) {
+      diceValue.setAttribute('src', '/images/2.gif'); 
+      diceValue.setAttribute('height', '32');
+      diceValue.setAttribute('width', '32');
+      doc.getElementById('bidengine');
+      bidDiceVal.appendChild(diceValue);
+      let br2 = doc.createElement('br');
+      bidDiceVal.appendChild(br2);
+    } else {
+      diceValue.setAttribute('src', '/images/' + dVal + '.gif');
+      diceValue.setAttribute('height', '32');
+      diceValue.setAttribute('width', '32');
+      document.getElementsById('bidengine');
+      bidDiceVal.appendChild(diceValue);
+      let br2 = doc.createElement('br');
+      bidDiceVal.appendChild(br2);
+    }
+    decreaseDiceNumber.setAttribute('type', 'image');
+    decreaseDiceNumber.setAttribute('src', '/images/downarrow.gif'); 
+    decreaseDiceNumber.setAttribute('height', '16');
+    decreaseDiceNumber.setAttribute('width', '32');
+    bidDiceVal.appendChild(decreaseDiceNumber);
+    let br3 = doc.createElement('br');
+    bidDiceVal.appendChild(br3);
+
+    increaseDiceValue.setAttribute('type', 'image');
+    increaseDiceValue.setAttribute('src', '../images/uparrow.gif');  
+    increaseDiceValue.setAttribute('height', '16');
+    increaseDiceValue.setAttribute('width', '32');
+    bidDiceAmt.appendChild(increaseDiceValue);
+    let br4 = doc.createElement('br');
+    bidDiceAmt.appendChild(br4);
+    let diceBidDisplay = doc.createElement('p');
+    let diceBidNumber = latestBid.diceAmt;
+    diceBidNumber.toString();
+    bidDiceAmt.appendChild(diceBidDisplay);
+    diceBidDisplay.textContent = diceBidNumber;
+    let br5 = doc.createElement('br');
+    bidDiceAmt.appendChild(br5);
+    decreaseDiceValue.setAttribute('type', 'image');
+    decreaseDiceValue.setAttribute('src', '../images/downarrow.gif');  
+    decreaseDiceValue.setAttribute('height', '16');
+    decreaseDiceValue.setAttribute('width', '32');
+    bidDiceAmt.appendChild(decreaseDiceValue);
+    bidDiceAmt.appendChild( document.createTextNode( '\u00A0\u00A0' ) );
+  }
 
   function drawButtons() {
   let doc = window.document;
+  let bidButton = doc.createElement('button');
+  doc.body.appendChild(bidButton);
+  bidButton.id = 'bid';
+  bidButton.textContent = " I Have Bid ";
+  bidButton.href = "#";
+  bidButton.onclick = bid;
+  doc.body.appendChild( document.createTextNode( '\u00A0\u00A0' ) );
 
   let revealButton = doc.createElement('button');
   doc.body.appendChild(revealButton);
@@ -184,14 +269,6 @@ function drawGame(gameState, myID) {
   revealButton.textContent = " Liar! ";
   revealButton.href = "#";
   revealButton.onclick = reveal;
-  doc.body.appendChild( document.createTextNode( '\u00A0\u00A0' ) ); 
-  
-  let bidButton = doc.createElement('button');
-  doc.body.appendChild(bidButton);
-  bidButton.id = 'bid';
-  bidButton.textContent = " I Have Bid ";
-  bidButton.href = "#";
-  bidButton.onclick = bid;
   doc.body.appendChild( document.createTextNode( '\u00A0\u00A0' ) );
 
   let removeButton = doc.createElement('button');

@@ -1,3 +1,8 @@
+/* * {
+  margin: 0;
+  padding: 0;
+} */
+
 body {
   background-color: white;
 }
@@ -13,8 +18,19 @@ h2 {
 }
 
 p {
+  padding: 0px;
+  margin: 0px 12px -12px 0px;
   font-family: verdana;
+  font-weight: bold;
   font-size: 20px;
+  text-align: center;
+
+}
+
+.break {
+  font-size: 1pt;
+  margin:0px;
+  padding:0px;
 }
 
 div {
@@ -24,19 +40,53 @@ div {
   padding-right: 30px;
   padding-bottom: 20px;
   padding-left: 20px;
-  background-color: white; 
+  background-color: white;
+  font-size: 20px;
 }
 
-div.diceCount {
+#main {
+  display: flex;
+  flex-direction: row;
   font-family: verdana;
+  font-size: 20px;
+  padding-top: 20px;
+  padding-right: 30px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  background-color: white;
+  font-size: 20px;
 }
 
-div.player { 
+#game {
+  display: flex;
+  flex-direction: column;
+}
+
+#bidengine {
+  padding-top: 140px;
+  display: flex;
+  flex-direction: row;
+}
+
+.bidDiceVal > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.bidDiceAmt > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.dicecount {
+font-family: verdana;
+}
+
+.player { 
   color: black;
   text-align: right;
   background-color: #ffffff; 
   position: relative;
-  margin: 2px 2px 2px 2px;
   left: 0px;
   width: 300px;
   border-style: solid;
@@ -45,7 +95,7 @@ div.player {
   border-radius: 5px;
 }
 
-div.it { 
+.it { 
   color: black;
   text-align: right;
   background-color: yellow; 
@@ -53,7 +103,6 @@ div.it {
   background-repeat:no-repeat;
   background-position:left center;
   position: relative;
-  margin: 2px 2px 2px 2px;
   left: 0px;
   width: 300px;
   border-style: solid;
@@ -62,18 +111,22 @@ div.it {
   border-radius: 5px;
 }
 
-div.explayer { 
+.observer { 
+  font-size: 14px;
   color: white;
   text-align: right;
   background-color: #666666; 
   position: relative;
-  margin: 2px 2px 2px 2px;
   left: 0px;
   width: 300px;
   border-style: solid;
   border-width: 1px;
   border-color: blue;
   border-radius: 5px;
+}
+
+input {
+  break-after: always;
 }
 
 a:link {
