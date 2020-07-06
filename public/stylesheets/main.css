@@ -19,7 +19,7 @@ h2 {
 
 p {
   padding: 0px;
-  margin: 0px 12px -12px 0px;
+  margin: 5px 12px -17px 0px;
   font-family: verdana;
   font-weight: bold;
   font-size: 20px;
@@ -60,10 +60,13 @@ div {
 #game {
   display: flex;
   flex-direction: column;
+  padding-right: 0px;
+
 }
 
 #bidengine {
-  padding-top: 140px;
+  padding-left: 0px;
+  padding-top: 141px;
   display: flex;
   flex-direction: row;
 }
@@ -71,11 +74,15 @@ div {
 .bidDiceVal > div {
   display: flex;
   flex-direction: column;
+  padding-right: 0px;
+
 }
 
 .bidDiceAmt > div {
   display: flex;
   flex-direction: column;
+  padding-left: 0px;
+
 }
 
 .dicecount {

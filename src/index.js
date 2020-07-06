@@ -10,7 +10,7 @@ let displayName;
 let isOver;
 let latestBid = {
   player: '',
-  diceVal: 0,
+  diceVal: 2,
   diceAmt: 1
 };
 
@@ -119,6 +119,53 @@ function getImages(roll) {
   return arr;
 } 
 
+function incrementDiceVal() {
+  console.log('queef');
+  let currentVal = latestBid.diceVal;
+  if (currentVal == 0) {
+    currentVal = currentVal + 3;
+  } else if (currentVal == 6) {
+    currentVal;
+  } else {
+    currentVal = currentVal +1;
+  }
+  latestBid.diceVal = currentVal;
+  drawBid();
+}
+
+function decrementDiceVal() {
+  let currentVal = latestBid.diceVal;
+  if (currentVal == 2) {
+    currentVal
+  } else {
+    currentVal = currentVal -1;
+  }
+  latestBid.diceVal = currentVal;
+  drawBid();
+}
+
+function increaseDice() {
+  let diceNo = latestBid.diceAmt;
+  if (diceNo < gameState.diceTotal) {
+    diceNo = diceNo +1;
+  } else {
+    diceNo;
+  }
+  latestBid.diceAmt = diceNo;
+  drawBid();
+}
+
+function decreaseDice() {
+  let diceNo = latestBid.diceAmt;
+  if (diceNo == 1) {
+    diceNo;
+  } else {
+    diceNo = diceNo -1;
+  }
+  latestBid.diceAmt = diceNo;
+  drawBid();
+}
+
 function drawGame(gameState, myID) {
   let doc = window.document;
   let gameDiv = document.getElementById('game');
@@ -183,6 +230,9 @@ function drawGame(gameState, myID) {
   function drawBid() {
     let doc = window.document;
     let bidDiv = doc.getElementById('bidengine');
+    while (bidDiv.firstChild) {
+      bidDiv.removeChild(bidDiv.firstChild);
+    }
     let mainCont = doc.getElementById('main');
     let bidDiceVal = doc.createElement('div');
     bidDiceVal.className = 'bidDiceVal';
@@ -191,53 +241,43 @@ function drawGame(gameState, myID) {
     mainCont.appendChild(bidDiv);
     bidDiv.appendChild(bidDiceVal);
     bidDiv.appendChild(bidDiceAmt);
-    let increaseDiceNumber = doc.createElement('input');
-    let decreaseDiceNumber = doc.createElement('input');
-    let increaseDiceValue = doc.createElement('input');
-    let decreaseDiceValue = doc.createElement('input');
+    let increaseDiceVal = doc.createElement('img');
+    increaseDiceVal.setAttribute('src', '/images/' + 'uparrow.gif'); 
+    increaseDiceVal.setAttribute('height', '16');
+    increaseDiceVal.setAttribute('width', '32');
+    increaseDiceVal.onclick = incrementDiceVal; 
+    bidDiceVal.appendChild(increaseDiceVal);
+    let br1 = doc.createElement('br');
+    bidDiceVal.appendChild(br1); 
+
     let diceValue = doc.createElement('img');
     dVal = latestBid.diceVal;
-    increaseDiceNumber.setAttribute('type', 'image');
-    increaseDiceNumber.setAttribute('src', '/images/' + 'uparrow.gif'); 
-    increaseDiceNumber.setAttribute('height', '16');
-    increaseDiceNumber.setAttribute('width', '32');
+    diceValue.setAttribute('src', '/images/' + dVal + '.gif');
+    diceValue.setAttribute('height', '32');
+    diceValue.setAttribute('width', '32');
+    document.getElementById('bidengine');
+    bidDiceVal.appendChild(diceValue);
+    let br2 = doc.createElement('br');
+    bidDiceVal.appendChild(br2);
 
-    bidDiceVal.appendChild(increaseDiceNumber);
-    let br1 = doc.createElement('br');
-    bidDiceVal.appendChild(br1);
-
-    if (dVal == 0) {
-      diceValue.setAttribute('src', '/images/2.gif'); 
-      diceValue.setAttribute('height', '32');
-      diceValue.setAttribute('width', '32');
-      doc.getElementById('bidengine');
-      bidDiceVal.appendChild(diceValue);
-      let br2 = doc.createElement('br');
-      bidDiceVal.appendChild(br2);
-    } else {
-      diceValue.setAttribute('src', '/images/' + dVal + '.gif');
-      diceValue.setAttribute('height', '32');
-      diceValue.setAttribute('width', '32');
-      document.getElementsById('bidengine');
-      bidDiceVal.appendChild(diceValue);
-      let br2 = doc.createElement('br');
-      bidDiceVal.appendChild(br2);
-    }
-    decreaseDiceNumber.setAttribute('type', 'image');
-    decreaseDiceNumber.setAttribute('src', '/images/downarrow.gif'); 
-    decreaseDiceNumber.setAttribute('height', '16');
-    decreaseDiceNumber.setAttribute('width', '32');
-    bidDiceVal.appendChild(decreaseDiceNumber);
+    let decreaseDiceVal = doc.createElement('img');
+    decreaseDiceVal.setAttribute('src', '/images/downarrow.gif'); 
+    decreaseDiceVal.setAttribute('height', '16');
+    decreaseDiceVal.setAttribute('width', '32');
+    decreaseDiceVal.onclick = decrementDiceVal; 
+    bidDiceVal.appendChild(decreaseDiceVal);
     let br3 = doc.createElement('br');
     bidDiceVal.appendChild(br3);
 
-    increaseDiceValue.setAttribute('type', 'image');
-    increaseDiceValue.setAttribute('src', '../images/uparrow.gif');  
-    increaseDiceValue.setAttribute('height', '16');
-    increaseDiceValue.setAttribute('width', '32');
-    bidDiceAmt.appendChild(increaseDiceValue);
+    let increaseDiceAmt = doc.createElement('img');
+    increaseDiceAmt.setAttribute('src', '../images/uparrow.gif');  
+    increaseDiceAmt.setAttribute('height', '16');
+    increaseDiceAmt.setAttribute('width', '32');
+    increaseDiceAmt.onclick = increaseDice; 
+    bidDiceAmt.appendChild(increaseDiceAmt);
     let br4 = doc.createElement('br');
     bidDiceAmt.appendChild(br4);
+
     let diceBidDisplay = doc.createElement('p');
     let diceBidNumber = latestBid.diceAmt;
     diceBidNumber.toString();
@@ -245,11 +285,13 @@ function drawGame(gameState, myID) {
     diceBidDisplay.textContent = diceBidNumber;
     let br5 = doc.createElement('br');
     bidDiceAmt.appendChild(br5);
-    decreaseDiceValue.setAttribute('type', 'image');
-    decreaseDiceValue.setAttribute('src', '../images/downarrow.gif');  
-    decreaseDiceValue.setAttribute('height', '16');
-    decreaseDiceValue.setAttribute('width', '32');
-    bidDiceAmt.appendChild(decreaseDiceValue);
+
+    let decreaseDiceAmt = doc.createElement('img');
+    decreaseDiceAmt.setAttribute('src', '../images/downarrow.gif');  
+    decreaseDiceAmt.setAttribute('height', '16');
+    decreaseDiceAmt.setAttribute('width', '32');
+    decreaseDiceAmt.onclick = decreaseDice
+    bidDiceAmt.appendChild(decreaseDiceAmt);
     bidDiceAmt.appendChild( document.createTextNode( '\u00A0\u00A0' ) );
   }
 
