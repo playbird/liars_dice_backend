@@ -82,7 +82,6 @@ function getGameForUser(userID) {
     isOver: isGameOver(),
     diceTotal: diceAll()
   };
-  console.log(privateGame.observers);
   for (var i = 0; i < getUserCount(); i++) {
     let user = game.users[i];
     if ((user.id == userID) || game.reveal) {
@@ -104,7 +103,6 @@ function userToObserver(game) {
     if (game.users[i].dice.length == 0) {
       outOfGame = game.users[i];
       game.observers.push(outOfGame);
-      // console.log(outOfGame);
       game.users.splice([i], 1);
     }
   }

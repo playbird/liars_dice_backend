@@ -102,7 +102,6 @@ function initialize() {
   } 
   createUser(displayName).then(response => {
     myID = response.data.id;
-    console.log(response.data);
     update(myID);
   });
 }
@@ -120,27 +119,18 @@ function getImages(roll) {
 } 
 
 function incrementDiceVal() {
-  console.log('queef');
-  let currentVal = latestBid.diceVal;
-  if (currentVal == 0) {
-    currentVal = currentVal + 3;
-  } else if (currentVal == 6) {
-    currentVal;
-  } else {
-    currentVal = currentVal +1;
-  }
-  latestBid.diceVal = currentVal;
+  if (latestBid.diceVal == 0) {
+    latestBid.diceVal = 3;
+  } else if (latestBid.diceVal < 6) {
+    latestBid.diceVal++;
+  } 
   drawBid();
 }
 
 function decrementDiceVal() {
-  let currentVal = latestBid.diceVal;
-  if (currentVal == 2) {
-    currentVal
-  } else {
-    currentVal = currentVal -1;
-  }
-  latestBid.diceVal = currentVal;
+  if (latestBid.diceVal > 2) {
+    latestBid.diceVal--;
+  } 
   drawBid();
 }
 
@@ -164,6 +154,16 @@ function decreaseDice() {
   }
   latestBid.diceAmt = diceNo;
   drawBid();
+}
+
+function createImage(imagePath, height, width, onClickFunction, parent) {
+  let image = window.document.createElement('img');
+    image.setAttribute('src', imagePath); 
+    image.setAttribute('height', height);
+    image.setAttribute('width', width);
+    image.onclick = onClickFunction; 
+    parent.appendChild(image);
+    return image;
 }
 
 function drawGame(gameState, myID) {
@@ -241,17 +241,13 @@ function drawGame(gameState, myID) {
     mainCont.appendChild(bidDiv);
     bidDiv.appendChild(bidDiceVal);
     bidDiv.appendChild(bidDiceAmt);
-    let increaseDiceVal = doc.createElement('img');
-    increaseDiceVal.setAttribute('src', '/images/' + 'uparrow.gif'); 
-    increaseDiceVal.setAttribute('height', '16');
-    increaseDiceVal.setAttribute('width', '32');
-    increaseDiceVal.onclick = incrementDiceVal; 
-    bidDiceVal.appendChild(increaseDiceVal);
+
+    createImage('/images/uparrow.gif', '16', '32', incrementDiceVal, bidDiceVal);
     let br1 = doc.createElement('br');
     bidDiceVal.appendChild(br1); 
 
-    let diceValue = doc.createElement('img');
     dVal = latestBid.diceVal;
+    let diceValue = doc.createElement('img');
     diceValue.setAttribute('src', '/images/' + dVal + '.gif');
     diceValue.setAttribute('height', '32');
     diceValue.setAttribute('width', '32');
@@ -260,21 +256,11 @@ function drawGame(gameState, myID) {
     let br2 = doc.createElement('br');
     bidDiceVal.appendChild(br2);
 
-    let decreaseDiceVal = doc.createElement('img');
-    decreaseDiceVal.setAttribute('src', '/images/downarrow.gif'); 
-    decreaseDiceVal.setAttribute('height', '16');
-    decreaseDiceVal.setAttribute('width', '32');
-    decreaseDiceVal.onclick = decrementDiceVal; 
-    bidDiceVal.appendChild(decreaseDiceVal);
+    createImage('/images/downarrow.gif', '16', '32', decrementDiceVal, bidDiceVal);
     let br3 = doc.createElement('br');
     bidDiceVal.appendChild(br3);
 
-    let increaseDiceAmt = doc.createElement('img');
-    increaseDiceAmt.setAttribute('src', '../images/uparrow.gif');  
-    increaseDiceAmt.setAttribute('height', '16');
-    increaseDiceAmt.setAttribute('width', '32');
-    increaseDiceAmt.onclick = increaseDice; 
-    bidDiceAmt.appendChild(increaseDiceAmt);
+    createImage('/images/uparrow.gif', '16', '32', increaseDice, bidDiceAmt);
     let br4 = doc.createElement('br');
     bidDiceAmt.appendChild(br4);
 
@@ -286,13 +272,8 @@ function drawGame(gameState, myID) {
     let br5 = doc.createElement('br');
     bidDiceAmt.appendChild(br5);
 
-    let decreaseDiceAmt = doc.createElement('img');
-    decreaseDiceAmt.setAttribute('src', '../images/downarrow.gif');  
-    decreaseDiceAmt.setAttribute('height', '16');
-    decreaseDiceAmt.setAttribute('width', '32');
-    decreaseDiceAmt.onclick = decreaseDice
-    bidDiceAmt.appendChild(decreaseDiceAmt);
-    bidDiceAmt.appendChild( document.createTextNode( '\u00A0\u00A0' ) );
+    createImage('/images/downarrow.gif', '16', '32', decreaseDice, bidDiceAmt);
+      bidDiceAmt.appendChild( document.createTextNode( '\u00A0\u00A0' ) );
   }
 
   function drawButtons() {
