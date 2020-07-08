@@ -44,13 +44,15 @@ function remove() {
 }
 
 function bid() {
-  axios.post('/bids')
+  axios.post('/bids', {
+    latestBid: latestBid 
+  })
   .then(function (response) {
     console.log(response);
   })
   .catch(function (error) {
     console.log(error);
-  })
+  });
 }
 
 function newGame() {

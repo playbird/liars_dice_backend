@@ -1,4 +1,5 @@
 const express = require('express')
+const bodyParser = require('body-parser');
 const path = require('path')
 
 const PORT = process.env.PORT || 5000
@@ -7,7 +8,12 @@ const PORT = process.env.PORT || 5000
 const game = {
   users: [],
   observers: [],
-  reveal: false
+  reveal: false,
+  previousBid: {
+    player: null,
+    diceVal: 2,
+    diceAmt: 1
+  } 
 };
 
 function getUserCount() {
@@ -80,7 +86,8 @@ function getGameForUser(userID) {
     users: [],
     observers: obs,
     isOver: isGameOver(),
-    diceTotal: diceAll()
+    diceTotal: diceAll(),
+    previousBid: game.previousBid
   };
   for (var i = 0; i < getUserCount(); i++) {
     let user = game.users[i];
@@ -160,11 +167,14 @@ function newGameHandler(req, res) {
 }
 
 function bidHandler(req, res) {
+  game.previousBid = req.body.latestBid;
+  res.send(game.previousBid);
   advanceItUser();
 }
 
 express()
   .use(express.static(path.join(__dirname, 'public')))
+  .use(bodyParser.json())
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
   .get('/', rootHandler)
