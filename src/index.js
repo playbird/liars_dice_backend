@@ -8,11 +8,18 @@ let myID;
 let gameState;
 let displayName;
 let isOver;
+let previousBid = {
+  player: '',
+  diceVal: 0,
+  diceAmt: 0
+};
 let latestBid = {
   player: '',
   diceVal: 2,
   diceAmt: 1
 };
+// let pDVal = 0;
+// let dA = 0;
 
 // returns a Promise
 function getGame(userID) {
@@ -48,7 +55,7 @@ function bid() {
     latestBid: latestBid 
   })
   .then(function (response) {
-    console.log(response);
+    console.log("bid response" + response);
   })
   .catch(function (error) {
     console.log(error);
@@ -84,19 +91,35 @@ function update(userID) {
     gameState = response.data.game;
     observeState = response.data.game.observers;
     isOver = response.data.game.isOver;
+    previousBid = response.data.game.previousBid;
+    // console.log(previousBid.diceVal);
     if (isOver) {
       showNewGameButton();
     } else {
       showPlayButtons();
     }
     drawGame(gameState, myID);
-    drawObservers(observeState);
-    setTimeout(update, 1500, myID);
+    drawObservers(observeState)
+    reDrawPreviousBid();
+    setTimeout(update, 1000, myID);
   });
+}
+
+function reDrawPreviousBid() {
+  let doc = window.document;
+  
+  let dA = previousBid.diceAmt;
+  let diceBidDisplay = doc.getElementById('dicedisplay');
+  diceBidDisplay.textContent = 'Bid: ' + dA; 
+
+  let dV = previousBid.diceVal;
+  let diceValue = doc.getElementById('dicebidface');
+  diceValue.setAttribute('src', '/images/' + dV + '.gif');
 }
 
 function initialize() {
   drawButtons();
+  drawPreviousBid();
   drawBid();
   displayName = prompt("Type your name and click OK", "New Player");
   if (displayName == "") {
@@ -228,6 +251,48 @@ function drawGame(gameState, myID) {
       observerDiv.appendChild(observer);
     }
   }
+
+  function drawPreviousBid() {
+    let doc = window.document;
+    let pBidDiv = doc.getElementById('previousbid');
+    while (pBidDiv.firstChild) {
+      pBidDiv.removeChild(pBidDiv.firstChild);
+    }
+    let mainCont = doc.getElementById('main');
+    let bidCont = doc.getElementById('bids');
+    let pBidDiceVal = doc.createElement('div');
+    let pBidDiceAmt = doc.createElement('div');
+    pBidDiceVal.className = 'pBidDiceVal';
+    pBidDiceAmt.className = 'pBidDiceAmt';
+    mainCont.appendChild(bidCont);
+    bidCont.appendChild(pBidDiv);
+    pBidDiv.appendChild(pBidDiceAmt);
+    pBidDiv.appendChild(pBidDiceVal);
+    pDVal = previousBid.diceVal;
+
+    let diceBidDisplay = doc.createElement('p');
+    diceBidDisplay.setAttribute('id', 'dicedisplay');
+    let diceBidNumber = previousBid.diceAmt;
+    diceBidNumber.toString();
+    pBidDiceAmt.appendChild(diceBidDisplay);
+    diceBidDisplay.textContent = 'Bid: ' + diceBidNumber;
+
+    let diceValue = doc.createElement('img');
+    diceValue.setAttribute('id', 'dicebidface')
+    diceValue.setAttribute('src', '/images/' + pDVal + '.gif');
+    diceValue.setAttribute('height', '32');
+    diceValue.setAttribute('width', '32');
+    pBidDiceVal.appendChild(diceValue);
+
+    let revealButton = doc.createElement('button');
+
+    pBidDiv.appendChild(revealButton);
+    revealButton.id = 'reveal';
+    revealButton.textContent = " Liar! ";
+    revealButton.href = "#";
+    revealButton.onclick = reveal;
+    // doc.body.appendChild( document.createTextNode( '\u00A0\u00A0' ) );
+  }
   
   function drawBid() {
     let doc = window.document;
@@ -236,13 +301,17 @@ function drawGame(gameState, myID) {
       bidDiv.removeChild(bidDiv.firstChild);
     }
     let mainCont = doc.getElementById('main');
+    let bidCont = doc.getElementById('bids');
     let bidDiceVal = doc.createElement('div');
     bidDiceVal.className = 'bidDiceVal';
     let bidDiceAmt = doc.createElement('div');
     bidDiceAmt.className = 'bidDiceAmt';
-    mainCont.appendChild(bidDiv);
-    bidDiv.appendChild(bidDiceVal);
+    let bidBut = doc.createElement('div');
+    mainCont.appendChild(bidCont);
+    bidCont.appendChild(bidDiv);
     bidDiv.appendChild(bidDiceAmt);
+    bidDiv.appendChild(bidDiceVal);
+    bidDiv.appendChild(bidBut);
 
     createImage('/images/uparrow.gif', '16', '32', incrementDiceVal, bidDiceVal);
     let br1 = doc.createElement('br');
@@ -250,6 +319,7 @@ function drawGame(gameState, myID) {
 
     dVal = latestBid.diceVal;
     let diceValue = doc.createElement('img');
+    diceValue.setAttribute('id', 'biddiceface');
     diceValue.setAttribute('src', '/images/' + dVal + '.gif');
     diceValue.setAttribute('height', '32');
     diceValue.setAttribute('width', '32');
@@ -267,34 +337,30 @@ function drawGame(gameState, myID) {
     bidDiceAmt.appendChild(br4);
 
     let diceBidDisplay = doc.createElement('p');
-    let diceBidNumber = latestBid.diceAmt;
-    diceBidNumber.toString();
+    let diceBidV = latestBid.diceAmt;
+    diceBidV.toString();
     bidDiceAmt.appendChild(diceBidDisplay);
-    diceBidDisplay.textContent = diceBidNumber;
+    diceBidDisplay.textContent = diceBidV;
     let br5 = doc.createElement('br');
     bidDiceAmt.appendChild(br5);
 
     createImage('/images/downarrow.gif', '16', '32', decreaseDice, bidDiceAmt);
-      bidDiceAmt.appendChild( document.createTextNode( '\u00A0\u00A0' ) );
+    // bidDiceAmt.appendChild( document.createTextNode( '\u00A0\u00A0' ) );
+    
+    let bidButton = doc.createElement('button');
+    bidBut.appendChild(bidButton);
+    bidButton.id = 'bid';
+    bidButton.textContent = " Place Bid ";
+    bidButton.href = "#";
+    bidButton.onclick = bidBtn;
+  }
+
+  function bidBtn() {
+    bid();
   }
 
   function drawButtons() {
   let doc = window.document;
-  let bidButton = doc.createElement('button');
-  doc.body.appendChild(bidButton);
-  bidButton.id = 'bid';
-  bidButton.textContent = " I Have Bid ";
-  bidButton.href = "#";
-  bidButton.onclick = bid;
-  doc.body.appendChild( document.createTextNode( '\u00A0\u00A0' ) );
-
-  let revealButton = doc.createElement('button');
-  doc.body.appendChild(revealButton);
-  revealButton.id = 'reveal';
-  revealButton.textContent = " Liar! ";
-  revealButton.href = "#";
-  revealButton.onclick = reveal;
-  doc.body.appendChild( document.createTextNode( '\u00A0\u00A0' ) );
 
   let removeButton = doc.createElement('button');
   doc.body.appendChild(removeButton);
