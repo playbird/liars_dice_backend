@@ -80,6 +80,20 @@ function rootHandler(req, res) {
   res.render('pages/index');
 }
 
+function isIt(userID) {
+  console.log(game.users);
+  if (game.users.length > 1) {
+    let itUser = game.users[1];
+    if (itUser.id == userID) {
+      return true;
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
+}
+
 function getGameForUser(userID) {
   let obs = userToObserver(game);
   let privateGame = {
@@ -87,8 +101,10 @@ function getGameForUser(userID) {
     observers: obs,
     isOver: isGameOver(),
     diceTotal: diceAll(),
-    previousBid: game.previousBid
-  };
+    previousBid: game.previousBid,
+    isIt: isIt(userID)
+  }; 
+  console.log(privateGame.isIt);
   for (var i = 0; i < getUserCount(); i++) {
     let user = game.users[i];
     if ((user.id == userID) || game.reveal) {

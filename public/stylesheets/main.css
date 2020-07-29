@@ -95,7 +95,7 @@ div {
 #bidengine {
   padding-left: 0px;
   padding-top: 0px;
-  display: flex;
+  display: flex; 
   flex-direction: row;
 }
 
