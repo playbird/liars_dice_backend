@@ -158,18 +158,6 @@ function advanceItUser () {
   arr.push(arr.shift());
 }
 
-function removeHandler(req, res) {
-  let userID = req.query.userID;
-  for (var i = 0; i < getUserCount(); i++) {
-    let loser = game.users[i].id;
-    if (loser == userID) {
-      game.users[i].dice.length -- ;
-    }
-    reroll();
-  }
-  res.send();
-}
-
 function newGameHandler(req, res) {
   for (var i = 0; i < getUserCount(); i++) {
     let user = game.users[i];
@@ -180,6 +168,18 @@ function newGameHandler(req, res) {
     } 
   res.send();
   }
+}
+
+function removeHandler(req, res) {
+  let userID = req.query.userID;
+  for (var i = 0; i < getUserCount(); i++) {
+    let loser = game.users[i].id;
+    if (loser == userID) {
+      game.users[i].dice.length -- ;
+    }
+    reroll();
+  }
+  res.send();
 }
 
 function bidHandler(req, res) {

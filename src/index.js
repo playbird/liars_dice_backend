@@ -365,10 +365,17 @@ function drawGame(gameState, myID) {
       bidButton.onclick = bidBtn;
 
   }
+
+  function validateBid() {
+    if ((latestBid.diceAmt > previousBid.diceAmt) || ((latestBid.diceVal > previousBid.diceVal) && (latestBid.diceAmt >= previousBid.diceAmt))) {
+      bid();
+    } else {
+      alert("Your bid is not valid. Try again.")
+    }
+  }
     
   function bidBtn() {
-    bid();
-    // displayBidEngine(false);
+    validateBid();
   }
 
   function drawButtons() {
