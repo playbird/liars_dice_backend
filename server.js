@@ -12,7 +12,7 @@ const game = {
   previousBid: {
     player: null,
     diceVal: 2,
-    diceAmt: 1
+    diceAmt: 0
   } 
 };
 
@@ -81,7 +81,6 @@ function rootHandler(req, res) {
 }
 
 function isIt(userID) {
-  console.log(game.users);
   if (game.users.length > 1) {
     let itUser = game.users[1];
     if (itUser.id == userID) {
@@ -104,7 +103,6 @@ function getGameForUser(userID) {
     previousBid: game.previousBid,
     isIt: isIt(userID)
   }; 
-  console.log(privateGame.isIt);
   for (var i = 0; i < getUserCount(); i++) {
     let user = game.users[i];
     if ((user.id == userID) || game.reveal) {
@@ -148,9 +146,8 @@ function reroll() {
   game.reveal = false;
 }
 
-function revealHandler(req, res) {
+function revealHandler() {
   game.reveal = true;
-  res.send();
 }
 
 function advanceItUser () {
@@ -170,18 +167,37 @@ function newGameHandler(req, res) {
   }
 }
 
-function removeHandler(req, res) {
-  let userID = req.query.userID;
-  for (var i = 0; i < getUserCount(); i++) {
-    let loser = game.users[i].id;
-    if (loser == userID) {
-      game.users[i].dice.length -- ;
+function checkBid() {
+  let users = game.users;
+  let n = 0;
+  for (let i = 0; i < users.length; i++) {
+    for (let j = 0; j < users[i].dice.length; j++) {
+      if ((users[i].dice[j] == game.previousBid.diceVal) || (users[i].dice[j] == 1)) {
+        n = n++;
+      }
     }
-    reroll();
   }
-  res.send();
+  if (n >= game.previousBid.diceAmt) {
+    users[1].dice.pop();
+  } else {
+    users[0].dice.pop();
+  }
+  reroll();
 }
 
+function removeHandler(req, res) {
+  revealHandler();
+  setTimeout(checkBid, 2000);
+  // let userID = req.query.userID;
+  // for (var i = 0; i < getUserCount(); i++) {
+  //   let loser = game.users[i].id;
+  //   if (loser == userID) {
+  //     game.users[i].dice.length -- ;
+  //   }
+  //   reroll();
+  // }
+  res.send();
+}
 function bidHandler(req, res) {
   game.previousBid = req.body.latestBid;
   res.send(game.previousBid);

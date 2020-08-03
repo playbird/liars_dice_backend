@@ -17,9 +17,8 @@ let previousBid = {
 let latestBid = {
   player: '',
   diceVal: 2,
-  diceAmt: 1
+  diceAmt: 0
 };
-// let it = false;
 
 // returns a Promise
 function getGame(userID) {
@@ -30,18 +29,18 @@ function createUser(displayName) {
   return axios.post('/users?displayName=' + displayName);
 }
 
-function reveal() {
-  axios.post('/users/dice')
-  .then(function (response) {
-    console.log(response);
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
-}
+// function reveal() {
+//   axios.post('/users/dice')
+//   .then(function (response) {
+//     console.log(response);
+//   })
+//   .catch(function (error) {
+//     console.log(error);
+//   });
+// }
 
-function remove() {
-  axios.delete('/users/dice?userID=' + myID)
+function reveal() {
+  axios.delete('/users/dice')
   .then(function (response) {
     console.log(response);
   })
@@ -55,7 +54,6 @@ function bid() {
     latestBid: latestBid 
   })
   .then(function (response) {
-    console.log("bid response" + response);
   })
   .catch(function (error) {
     console.log(error);
@@ -72,17 +70,22 @@ function newGame() {
   });
 }
 
-function showPlayButtons() {
-  document.getElementById('reveal').style.display = 'inline';
+function showPlayButtons(isIt) {
+  if (isIt == false) {
+    document.getElementById('reveal').style.visibility = 'hidden';
+  } else {
+    document.getElementById('reveal').style.visibility = 'visible';
+  }
+  
   // document.getElementById('bid').style.display = 'inline';
-  document.getElementById('remove').style.display = 'inline';
+  // document.getElementById('remove').style.display = 'inline';
   document.getElementById('newGame').style.display = 'none';
 }
 
 function showNewGameButton() {
   document.getElementById('reveal').style.display = 'none';
   // document.getElementById('bid').style.display = 'none';
-  document.getElementById('remove').style.display = 'none';
+  // document.getElementById('remove').style.display = 'none';
   document.getElementById('newGame').style.display = 'inline';
 }
 
@@ -105,7 +108,7 @@ function update(userID) {
     if (isOver) {
       showNewGameButton();
     } else {
-      showPlayButtons();
+      showPlayButtons(isIt);
     }
     displayBidEngine(isIt);
     drawGame(gameState, myID);
@@ -381,13 +384,13 @@ function drawGame(gameState, myID) {
   function drawButtons() {
   let doc = window.document;
 
-  let removeButton = doc.createElement('button');
-  doc.body.appendChild(removeButton);
-  removeButton.id = 'remove';
-  removeButton.textContent = " Remove a dice ";
-  removeButton.href = "#";
-  removeButton.onclick = remove;
-  doc.body.appendChild( document.createTextNode( '\u00A0\u00A0' ) );
+  // let removeButton = doc.createElement('button');
+  // doc.body.appendChild(removeButton);
+  // removeButton.id = 'remove';
+  // removeButton.textContent = " Remove a dice ";
+  // removeButton.href = "#";
+  // removeButton.onclick = remove;
+  // doc.body.appendChild( document.createTextNode( '\u00A0\u00A0' ) );
   
   let newGameButton = doc.createElement('button');
   doc.body.appendChild(newGameButton);
