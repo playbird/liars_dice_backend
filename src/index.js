@@ -68,12 +68,10 @@ function showPlayButtons(isIt) {
   } else {
     document.getElementById('reveal').style.visibility = 'visible';
   }
-  document.getElementById('newGame').style.display = 'none';
 }
 
 function showNewGameButton() {
-  document.getElementById('reveal').style.display = 'none';
-  document.getElementById('newGame').style.display = 'inline';
+  document.getElementById('newGame').style.visibility = 'visible';
 }
 
 function displayBidEngine(isIt) {
@@ -374,7 +372,7 @@ function drawGame(gameState, myID) {
   let newGameButton = doc.createElement('button');
   doc.body.appendChild(newGameButton);
   newGameButton.id = 'newGame';
-  newGameButton.style.display = 'none';
+  newGameButton.style.visibility = 'hidden';
   newGameButton.textContent = " Play Again? ";
   newGameButton.href = "#";
   newGameButton.onclick = newGame;

@@ -150,7 +150,7 @@ function revealHandler() {
   game.reveal = true;
 }
 
-function advanceItUser () {
+function advanceItUser() {
   let arr = game.users;
   arr.push(arr.shift());
 }
@@ -173,12 +173,16 @@ function checkBid() {
   for (let i = 0; i < users.length; i++) {
     for (let j = 0; j < users[i].dice.length; j++) {
       if ((users[i].dice[j] == game.previousBid.diceVal) || (users[i].dice[j] == 1)) {
-        n = n++;
+        console.log("users i dice j " + users[i].dice[j]);
+        console.log("pbid " + game.previousBid.diceVal);
+        n = n + 1;
+        console.log("n " + n);
       }
     }
   }
   if (n >= game.previousBid.diceAmt) {
     users[1].dice.pop();
+    advanceItUser()
   } else {
     users[0].dice.pop();
   }
@@ -189,7 +193,7 @@ function checkBid() {
 
 function removeHandler(req, res) {
   revealHandler();
-  setTimeout(checkBid, 8000);
+  setTimeout(checkBid, 5000);
   res.send();
 }
 function bidHandler(req, res) {
