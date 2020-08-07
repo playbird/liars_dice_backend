@@ -29,16 +29,6 @@ function createUser(displayName) {
   return axios.post('/users?displayName=' + displayName);
 }
 
-// function reveal() {
-//   axios.post('/users/dice')
-//   .then(function (response) {
-//     console.log(response);
-//   })
-//   .catch(function (error) {
-//     console.log(error);
-//   });
-// }
-
 function reveal() {
   axios.delete('/users/dice')
   .then(function (response) {
@@ -47,6 +37,8 @@ function reveal() {
   .catch(function (error) {
     console.log(error);
   })
+  latestBid.diceAmt = 1;
+  latestBid.diceVal = 2;
 }
 
 function bid() {
@@ -57,7 +49,7 @@ function bid() {
   })
   .catch(function (error) {
     console.log(error);
-  });
+  })
 }
 
 function newGame() {
@@ -76,16 +68,11 @@ function showPlayButtons(isIt) {
   } else {
     document.getElementById('reveal').style.visibility = 'visible';
   }
-  
-  // document.getElementById('bid').style.display = 'inline';
-  // document.getElementById('remove').style.display = 'inline';
   document.getElementById('newGame').style.display = 'none';
 }
 
 function showNewGameButton() {
   document.getElementById('reveal').style.display = 'none';
-  // document.getElementById('bid').style.display = 'none';
-  // document.getElementById('remove').style.display = 'none';
   document.getElementById('newGame').style.display = 'inline';
 }
 
@@ -383,14 +370,6 @@ function drawGame(gameState, myID) {
 
   function drawButtons() {
   let doc = window.document;
-
-  // let removeButton = doc.createElement('button');
-  // doc.body.appendChild(removeButton);
-  // removeButton.id = 'remove';
-  // removeButton.textContent = " Remove a dice ";
-  // removeButton.href = "#";
-  // removeButton.onclick = remove;
-  // doc.body.appendChild( document.createTextNode( '\u00A0\u00A0' ) );
   
   let newGameButton = doc.createElement('button');
   doc.body.appendChild(newGameButton);

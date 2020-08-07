@@ -182,20 +182,14 @@ function checkBid() {
   } else {
     users[0].dice.pop();
   }
+  game.previousBid.diceAmt = 0;
+  game.previousBid.diceVal = 2;
   reroll();
 }
 
 function removeHandler(req, res) {
   revealHandler();
   setTimeout(checkBid, 2000);
-  // let userID = req.query.userID;
-  // for (var i = 0; i < getUserCount(); i++) {
-  //   let loser = game.users[i].id;
-  //   if (loser == userID) {
-  //     game.users[i].dice.length -- ;
-  //   }
-  //   reroll();
-  // }
   res.send();
 }
 function bidHandler(req, res) {
@@ -212,7 +206,6 @@ express()
   .get('/', rootHandler)
   .post('/users', createUserHandler)
   .get('/games', gamesHandler)
-  .post('/users/dice', revealHandler)
   .post('/games', newGameHandler)
   .delete('/users/dice', removeHandler)
   .post('/bids', bidHandler)
