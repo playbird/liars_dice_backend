@@ -189,7 +189,7 @@ function checkBid() {
 
 function removeHandler(req, res) {
   revealHandler();
-  setTimeout(checkBid, 2000);
+  setTimeout(checkBid, 8000);
   res.send();
 }
 function bidHandler(req, res) {
